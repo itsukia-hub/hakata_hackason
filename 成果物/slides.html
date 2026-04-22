@@ -531,15 +531,20 @@
       border-radius: 8px;
       padding: 0.7em 0.9em;
       font-family: "SFMono-Regular", "Consolas", "Menlo", "Monaco", monospace;
-      font-size: 0.42em;
+      font-size: 0.5em;
       line-height: 1.55;
       margin: 0;
       text-align: left;
       white-space: pre-wrap;
       word-break: break-word;
-      max-height: 10.5em;
+      max-height: 16em;
       overflow-y: auto;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+    }
+    /* 指摘#修正: 単独プロンプト(業務系Java/業務翻訳/図の自動生成)は横幅を絞って縦を広く */
+    .reveal .prompt-card > .prompt-wrap {
+      max-width: 78%;
+      margin: 0.4em auto;
     }
     .reveal .copy-btn {
       position: absolute;
@@ -822,49 +827,49 @@
               <td>&#x1F3E6; <strong>金融</strong></td>
               <td>三井住友FG「SMBC-GAI」130万件学習のRAG</td>
               <td>生成AI投資500億円</td>
-              <td><a href="https://www.smbc.co.jp/news/" target="_blank">smbc.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F3ED; <strong>製造</strong></td>
               <td>竹中工務店「デジタル棟梁」画像→ヒビ・サビ検出</td>
               <td>測量コスト70%減</td>
-              <td><a href="https://www.takenaka.co.jp/news/" target="_blank">takenaka.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F3E5; <strong>医療</strong></td>
               <td>東芝 ― 健診データから6年先の6疾病リスクを予測</td>
               <td>保健指導の精度向上</td>
-              <td><a href="https://www.global.toshiba/" target="_blank">toshiba.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F393; <strong>教育</strong></td>
               <td>佐賀県・川登中 ― GPT-4で英語個別フィードバック</td>
               <td>全員が3回以上練習</td>
-              <td><a href="https://shift-ai.co.jp/" target="_blank">shift-ai.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F3DB; <strong>自治体</strong></td>
               <td>善通寺市 ― 衛星写真×AIで固定資産税の課税変化検出</td>
               <td>現地調査負担軽減</td>
-              <td><a href="https://www.city.zentsuji.kagawa.jp/" target="_blank">zentsuji.kagawa.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F6D2; <strong>小売</strong></td>
               <td>ファミマ500店AI発注 / セブン社員8,000人にLLM</td>
               <td>議事録40分→10分</td>
-              <td><a href="https://www.family.co.jp/" target="_blank">family.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F69A; <strong>物流</strong></td>
               <td>アスクル ― 自動フォークリフト×エレベーター連携</td>
               <td>倉庫完全自動化</td>
-              <td><a href="https://www.askul.co.jp/" target="_blank">askul.co.jp</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
             <tr>
               <td>&#x1F4BB; <strong>IT開発</strong></td>
               <td>富士通「Takane」― 要件定義→テストまでAIが全工程</td>
               <td>3人月→4時間</td>
-              <td><a href="https://www.fujitsu.com/jp/" target="_blank">fujitsu.com</a></td>
+              <td><span style="color:#999; font-size: 0.9em;">記事URL調査中</span></td>
             </tr>
           </tbody>
         </table>
@@ -1069,10 +1074,7 @@
             </ul>
           </div>
           <div class="column" style="text-align: center;">
-            <!-- 画像挿入ガイド: NotebookLMの画面スクリーンショットをここに配置 -->
-            <div class="placeholder-notice" style="max-width: 100%; padding: 1.5em 1em;">
-              NotebookLM<br>画面イメージ
-            </div>
+            <img src="image/NotebookLM.png" alt="NotebookLM画面" class="slide-photo" style="max-width: 100%; max-height: 320px;">
           </div>
         </div>
       </section>
@@ -1251,33 +1253,7 @@
       </section>
 
       <section>
-        <h2>AIエージェントの3タイプ</h2>
-        <table>
-          <thead>
-            <tr><th>タイプ</th><th>特徴</th><th>代表例</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>チャット型</strong></td>
-              <td>1問1答のテキスト対話</td>
-              <td>ChatGPT、Claude</td>
-            </tr>
-            <tr>
-              <td><strong>コード補完型</strong></td>
-              <td>コーディング中にリアルタイム補完</td>
-              <td>GitHub Copilot</td>
-            </tr>
-            <tr>
-              <td><strong>エージェント型</strong></td>
-              <td>複数ファイルを跨いで自律的に生成・修正</td>
-              <td>Gemini Code Assist、<br>Claude Code、Cursor</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section>
-        <h2>Gemini Code Assist</h2>
+        <h2><span style="font-size: 1.1em; vertical-align: middle;">&#x2728;</span> Gemini Code Assist</h2>
         <h3>VSCodeで使える無料のAIエージェント</h3>
         <ul>
           <li><strong>Googleアカウント</strong>で無料利用可能</li>
@@ -1292,31 +1268,12 @@
         </ul>
       </section>
 
-      <section>
-        <h2>まずはこの型で頼む</h2>
-        <h3>コピペ用プロンプトテンプレ</h3>
-        <pre><code>あなたはやさしいWeb制作の先生です。
-初心者にも分かるように、○○を作ってください。
-
-条件:
-- HTML / CSS / JavaScript を使う
-- 必要なら index.html / style.css / game.js の3ファイルに分ける
-- 難しい書き方は避けて、シンプルにする
-- 変更したコードには短いコメントを入れる
-
-最後に必ず書いてほしいこと:
-- どのファイルに貼るか
-- 確認ポイントを3つ
-- うまくいかない時の見直しポイントを2つ</code></pre>
-        <p class="copy-note">右上の「コピー」でそのまま貼り付けできます</p>
-      </section>
-
       <section class="work-list-slide">
         <h2>ワーク: Gemini Code Assistを<br>使ってみよう</h2>
         <p>VSCodeでGemini Code Assistを起動して、<br>以下のいずれかを試してみましょう</p>
         <div class="work-card">
           <div class="label">お題 1</div>
-          <p>「HTMLで自己紹介ページを作ってください。<br>名前、趣味、好きな食べ物を載せてください」</p>
+          <p>「HTMLで自己紹介ページを作ってください。<br>あなたが好きな項目を自由に入れてください<br>（例: 名前、趣味、好きな食べ物、最近ハマっていることなど）」</p>
         </div>
         <div class="work-card">
           <div class="label">お題 2</div>
@@ -1360,15 +1317,16 @@
         <h2>お題1: 自己紹介ページの例</h2>
         <h3>プロンプト</h3>
         <pre><code>HTMLで自己紹介ページを作ってください。
-名前、趣味、好きな食べ物を載せてください</code></pre>
+あなたが好きな項目を自由に入れてください
+（例: 名前、趣味、好きな食べ物、最近ハマっていることなど）</code></pre>
         <h3>こんなコードが出てきます</h3>
         <pre><code>&lt;h1&gt;自己紹介&lt;/h1&gt;
 &lt;p&gt;名前: ○○ ○○&lt;/p&gt;
 &lt;p&gt;趣味: △△&lt;/p&gt;
-&lt;p&gt;好きな食べ物: □□&lt;/p&gt;</code></pre>
+&lt;p&gt;好きなもの: □□&lt;/p&gt;</code></pre>
         <h3>確認ポイント</h3>
         <ul>
-          <li>ブラウザに名前・趣味・好きな食べ物が表示されればOK</li>
+          <li>あなたが入れた項目がブラウザに表示されればOK</li>
         </ul>
       </section>
 
@@ -1419,7 +1377,6 @@
         </ul>
         <div class="info-card">
           <p><strong>ポイント:</strong> AIは「一発で完璧に作る道具」ではなく、<strong>作って → 試して → 直す</strong>相棒です。</p>
-          <p><strong>講師補足:</strong> ここで「保存」「ブラウザ確認」「再依頼」の3手順をもう一度口頭で確認すると、午後のハンズオンが安定します。</p>
         </div>
       </section>
 
@@ -1494,42 +1451,22 @@
         </div>
       </section>
 
-      <section class="prompt-card">
-        <h2>GitLab連携</h2>
-        <p>GitLab Duo がなくても、diff を渡すだけで CI 設定や MR レビューコメントが出せます。</p>
-        <div class="prompt-cols">
-          <div>
-            <h4>.gitlab-ci.yml 生成</h4>
-            <div class="prompt-wrap">
-              <button class="copy-btn" data-target="p-gitlabci">コピー</button>
-<pre id="p-gitlabci">Spring Boot 3.x + Maven + Java 21 のプロジェクトで使う
-.gitlab-ci.yml を書いてください。
-
-- build / test / package / deploy の4ステージ
-- test では JUnit レポートを artifact として保存
-- main ブランチへのマージ時のみ deploy
-- Docker image build も含む
-
-GitLab Runner の Docker executor 前提で。</pre>
-            </div>
-          </div>
-          <div>
-            <h4>MR（マージリクエスト）レビュー</h4>
-            <div class="prompt-wrap">
-              <button class="copy-btn" data-target="p-mrreview">コピー</button>
-<pre id="p-mrreview">以下の git diff をレビューしてください。
-
-- 意図の要約（3行以内）
-- 潜在的なバグ・副作用
-- テスト観点の追加提案
-- コーディング規約の観点
-
-【diff】
-(ここに git diff を貼る)</pre>
-            </div>
-          </div>
+      <!-- 指摘: GitLab連携 → GitLabの概要と主な機能に差し替え -->
+      <section>
+        <h2>GitLab ― 開発の統合プラットフォーム</h2>
+        <h3>Gitリポジトリを中心に、開発〜運用までを1つに</h3>
+        <ul>
+          <li>&#x1F4C1; <strong>Gitリポジトリ管理</strong> ― ソースコードのバージョン管理（GitHubと同等）</li>
+          <li>&#x1F501; <strong>CI/CD（GitLab CI）</strong> ― ビルド・テスト・デプロイを自動化</li>
+          <li>&#x1F4DD; <strong>Issue管理</strong> ― タスク・バグ・要望の追跡とマイルストーン管理</li>
+          <li>&#x1F50D; <strong>Merge Request</strong> ― コードレビュー、承認フロー、自動テスト連携</li>
+          <li>&#x1F6E1; <strong>セキュリティスキャン</strong> ― 依存ライブラリの脆弱性チェック・SAST/DAST</li>
+          <li>&#x2728; <strong>GitLab Duo（AI機能）</strong> ― コード補完、MRレビュー自動提案、チャット</li>
+          <li>&#x1F3E0; <strong>セルフホスト可</strong> ― 社内サーバーで運用すればソース非公開でも使える</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>GitHubの代替として、金融・官公庁・大企業で広く採用されています</p>
         </div>
-        <p class="prompt-tip">GitHub と手順はほぼ同じ。<code>git remote add origin</code> の URL が GitLab のものに変わるだけです。</p>
       </section>
 
       <!-- ============================================================
@@ -2399,14 +2336,8 @@ if (state !== 'playing') return;</pre>
       </section>
 
       <section style="text-align: center;">
-        <div class="slide-icon">&#x1F4DD;</div>
-        <h2 style="border-bottom: none; font-size: 1.8em;">アンケートのお願い</h2>
-        <p style="font-size: 1em; margin-top: 0.8em;">本日の感想をぜひお聞かせください</p>
-        <div class="highlight-box" style="margin-top: 1.2em;">
-          <p style="font-size: 1.1em;">アンケートURL / QRコード</p>
-          <p style="font-size: 0.75em; color: #555555; font-weight: normal;">（ここにQRコードまたはURLを配置）</p>
-        </div>
-        <p style="margin-top: 1.5em; font-size: 1.3em; font-weight: 700; color: #1a1a1a;">
+        <div class="slide-icon">&#x1F44F;</div>
+        <p style="margin-top: 1.5em; font-size: 1.8em; font-weight: 700; color: #1a1a1a;">
           本日はありがとうございました!
         </p>
       </section>
