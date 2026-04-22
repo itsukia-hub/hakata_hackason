@@ -535,14 +535,27 @@
       text-align: left;
       white-space: pre-wrap;
       word-break: break-word;
-      max-height: 16em;
+      max-height: 20em;
       overflow-y: auto;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
     }
-    /* 指摘#修正: 単独プロンプト(業務系Java/業務翻訳/図の自動生成)は横幅を絞って縦を広く */
+    /* プロンプト例の領域サイズ統一：横幅はワーク3つのAI比較のwork-cardに合わせる */
+    .reveal .prompt-card > .prompt-wrap,
+    .reveal .prompt-card > p,
+    .reveal .prompt-card > .prompt-tip,
+    .reveal .prompt-card > .copy-note {
+      max-width: min(68%, 760px);
+      margin-left: auto;
+      margin-right: auto;
+    }
     .reveal .prompt-card > .prompt-wrap {
-      max-width: 78%;
-      margin: 0.4em auto;
+      margin-top: 0.4em;
+      margin-bottom: 0.4em;
+    }
+    /* 2カラムのプロンプト(詳細設計書)は広めにする */
+    .reveal .prompt-card > .prompt-cols {
+      max-width: min(92%, 1000px);
+      margin: 0.3em auto;
     }
     .reveal .copy-btn {
       position: absolute;
@@ -1259,42 +1272,77 @@
         <h2><span style="font-size: 1.1em; vertical-align: middle;">&#x2728;</span> Gemini Code Assist</h2>
         <h3>VSCodeで使える無料のAIエージェント</h3>
         <ul>
-          <li><strong>Googleアカウント</strong>で無料利用可能</li>
+          <li>Googleの<strong>個人用アカウント</strong>で無料利用可能<br>
+            <span style="font-size: 0.8em; color: #e94560;">※会社アカウント（Workspace管理下）では利用できない場合があります</span></li>
           <li>VSCodeの<strong>拡張機能</strong>として動作</li>
           <li>3つの機能:
             <ul>
               <li><strong>コード補完</strong> ― 入力中に候補を提示</li>
               <li><strong>チャット</strong> ― コードについて質問</li>
-              <li><strong>エージェントモード</strong> ― 自律的にコードを生成・編集</li>
+              <li><strong>エージェントモード</strong> ― 自律的にコードを生成・編集<br>
+                <span style="font-size: 0.8em; color: #555;">※本ワークショップではトークン節約のため使用しません（説明のみ）</span></li>
             </ul>
           </li>
         </ul>
       </section>
 
+      <!-- 追加: Gemini Code Assist 使う時のTips -->
+      <section>
+        <h2>Gemini Code Assist ― 使うときのTips</h2>
+        <ul style="font-size: 0.9em;">
+          <li>&#x1F4A4; <strong>回答が遅いとき</strong><br>
+            一度サインアウトして再度サインインすると改善する場合があります</li>
+          <li>&#x1F512; <strong>オプトアウト設定</strong><br>
+            利用設定で「コードをGoogleの学習に使わせない（オプトアウト）」が可能。機密情報を扱う場合は必ずオフに</li>
+          <li>&#x1F4C2; <strong>一度ファイルを作成すると</strong><br>
+            エージェントモードを使わなくても、既存ファイルに対する編集・追加指示が通るようになる場合があります</li>
+          <li>&#x274C; <strong>生成結果のリジェクト（却下）</strong><br>
+            AIが提案した変更が気に入らないときは「拒否（Reject）」して再依頼できます。無理に採用せず、何度でも作り直せます</li>
+        </ul>
+      </section>
+
       <section class="work-list-slide">
         <h2>ワーク: Gemini Code Assistを<br>使ってみよう</h2>
-        <p>VSCodeでGemini Code Assistを起動して、<br>以下のいずれかを試してみましょう</p>
+        <p>VSCodeでGemini Code Assistを起動して、<br>以下を試してみましょう</p>
         <div class="work-card">
           <div class="label">お題 1</div>
-          <p>「HTMLで自己紹介ページを作ってください。<br>あなたが好きな項目を自由に入れてください<br>（例: 名前、趣味、好きな食べ物、最近ハマっていることなど）」</p>
+          <p style="font-size: 0.85em;">「自己紹介ページを作ってください。内容は以下でお願いします。<br>
+            名前：阿部樹<br>
+            趣味：読書<br>
+            ○○：○○…<br>
+            （あなたが好きな項目を自由に入れてください 例: 名前、趣味、好きな食べ物、最近ハマっていることなど）<br>
+            お願いします。」</p>
         </div>
         <div class="work-card">
           <div class="label">お題 2</div>
-          <p>「JavaScriptで今日の日付を表示する<br>プログラムを作ってください」</p>
+          <p>「既存のCSSを別ファイルに分割してください。」</p>
         </div>
         <div class="work-card">
           <div class="label">お題 3</div>
-          <p>「CSSで虹色のグラデーション背景を<br>作ってください」</p>
+          <p>「script.jsを作成してボタンをクリックしたら徐々に背景が黒、文字の色が白になるような処理を実装してください。」</p>
         </div>
-        <p style="font-size: 0.85em; color: #555555; margin-top: 0.5em;">
-          Live Serverでブラウザ確認まで体験しましょう
-        </p>
       </section>
 
+      <!-- 詰まった時の再依頼テンプレ 2パターン -->
       <section>
         <h2>詰まった時の再依頼テンプレ</h2>
-        <h3>症状と期待をセットで送る</h3>
-        <pre><code>今の作業で問題が起きています。
+        <div class="columns">
+          <div class="column">
+            <h3>① エラー文を貼って修正依頼</h3>
+<pre><code>以下のエラーが出ています。
+修正してください。
+
+【エラー文】
+(ここにエラーメッセージをそのまま貼る)
+
+【やろうとしていたこと】
+- ○○を表示したかった
+
+修正したコードを出してください。</code></pre>
+          </div>
+          <div class="column">
+            <h3>② 症状と期待をセットで送る</h3>
+<pre><code>今の作業で問題が起きています。
 
 やりたいこと:
 - ○○を表示したい / 動かしたい
@@ -1302,71 +1350,18 @@
 今起きていること:
 - 画面が真っ白
 - ボタンを押しても動かない
-- エラーが出ている
-
-エラー文:
-- ここにそのまま貼る
 
 お願い:
 - 原因を教えてください
-- 修正するファイル名を明記してください
-- 変更部分だけを分かりやすく示してください</code></pre>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>「全部直して」よりも<br>「何が起きているか」を伝える方が強いです</p>
+- 修正するファイル名を明記してください</code></pre>
+          </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>状況に応じて情報の粒度を変えて指示を出すことが大切です</p>
         </div>
       </section>
 
-      <section>
-        <h2>お題1: 自己紹介ページの例</h2>
-        <h3>プロンプト</h3>
-        <pre><code>HTMLで自己紹介ページを作ってください。
-あなたが好きな項目を自由に入れてください
-（例: 名前、趣味、好きな食べ物、最近ハマっていることなど）</code></pre>
-        <h3>こんなコードが出てきます</h3>
-        <pre><code>&lt;h1&gt;自己紹介&lt;/h1&gt;
-&lt;p&gt;名前: ○○ ○○&lt;/p&gt;
-&lt;p&gt;趣味: △△&lt;/p&gt;
-&lt;p&gt;好きなもの: □□&lt;/p&gt;</code></pre>
-        <h3>確認ポイント</h3>
-        <ul>
-          <li>あなたが入れた項目がブラウザに表示されればOK</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>お題2: 日付表示の例</h2>
-        <h3>プロンプト</h3>
-        <pre><code>JavaScriptで今日の日付を表示する
-プログラムを作ってください</code></pre>
-        <h3>こんなコードが出てきます</h3>
-        <pre><code>&lt;script&gt;
-  var today = new Date();
-  document.write(today.toLocaleDateString('ja-JP'));
-&lt;/script&gt;</code></pre>
-        <h3>確認ポイント</h3>
-        <ul>
-          <li>ブラウザに今日の日付（例: 2026/4/13）が表示されればOK</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>お題3: 虹色グラデーションの例</h2>
-        <h3>プロンプト</h3>
-        <pre><code>CSSで虹色のグラデーション背景を
-作ってください</code></pre>
-        <h3>こんなコードが出てきます</h3>
-        <pre><code>body {
-  background: linear-gradient(
-    to right, red, orange, yellow,
-    green, blue, indigo, violet
-  );
-  height: 100vh;
-}</code></pre>
-        <h3>確認ポイント</h3>
-        <ul>
-          <li>ブラウザの背景が虹色のグラデーションになればOK</li>
-        </ul>
-      </section>
+      <!-- お題1〜3の例スライドは削除済み（社長指示 2026-04-18） -->
 
       <section>
         <h2>ワークのまとめ</h2>
