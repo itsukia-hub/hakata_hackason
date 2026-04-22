@@ -1500,31 +1500,33 @@
         </blockquote>
       </section>
 
-      <!-- 業務翻訳: 前半レイアウトと統一 -->
+      <!-- 業務翻訳: 公式ドキュメント翻訳の例 -->
       <section class="prompt-card">
-        <h2>業務翻訳 ― 用語を固定する</h2>
-        <h3>DeepLで下訳 → LLMで用語統一と文体整形</h3>
+        <h2>業務翻訳 ― 公式ドキュメントを読む</h2>
+        <h3>英語の公式ドキュメントを、用語を固定して日本語化</h3>
         <div class="prompt-wrap">
           <button class="copy-btn" data-target="p-translate">コピー</button>
-<pre id="p-translate">以下の英語技術文書を日本語に翻訳してください。
+<pre id="p-translate">以下のReact公式ドキュメントを日本語に翻訳してください。
 
 【用語集】
-- authentication → 認証
-- authorization → 認可
-- token → トークン（カタカナ固定）
-- endpoint → エンドポイント（カタカナ固定）
-- middleware → ミドルウェア
+- component → コンポーネント（カタカナ固定）
+- hook → フック（カタカナ固定）
+- state → state（英語のまま）
+- props → props（英語のまま）
+- render → レンダリング
+- prop drilling → プロップドリリング
 
 【翻訳方針】
 - 敬体（です・ます調）
 - コードブロック内は翻訳しない
 - 用語集は厳守
+- 公式ドキュメント特有の言い回しは自然な日本語に
 
 【原文】
-(ここに英文を貼る)</pre>
+(ここに公式ドキュメントの英文を貼る)</pre>
         </div>
         <div class="highlight-box" style="margin-top: 0.5em;">
-          <p>議事録・社内マニュアル・技術文書で、月数十時間の削減事例あり</p>
+          <p>英語の公式ドキュメントが読みこなせると、最新の情報に一次ソースでアクセスできます</p>
         </div>
       </section>
 
@@ -1550,9 +1552,11 @@
 4. 認証基盤がDBをチェック
 5. 成功なら JWT を発行して顧客へ返す
 
-出力は mermaid コードブロックだけで。</pre>
+出力は mermaid コードブロックだけで。
+新規ファイルを作成して上記を記載するようにしてください。</pre>
         </div>
         <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>確認するには VSCode拡張機能「<strong>Markdown Preview Mermaid Support</strong>」が必要です</p>
           <p>「drawioのXML形式で出して」と指示すれば、drawioにそのまま貼り付けて編集可能</p>
         </div>
       </section>
@@ -2249,38 +2253,6 @@ if (state !== 'playing') return;</pre>
         <h2>振り返り &amp;<br>クロージング</h2>
         <p>16:50 - 17:00（10分）</p>
         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=140&fit=crop" alt="Achievement and celebration" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
-      </section>
-
-      <!-- 追加スライド: 活用度チェック票（主催者向け） -->
-      <section class="prompt-card">
-        <h2>活用度チェック票（主催者向け）</h2>
-        <p>受講後の効果測定に。3軸×3段階で定着を可視化します。</p>
-        <table class="help-table">
-          <thead>
-            <tr><th>軸</th><th>0：未達</th><th>1：部分達成</th><th>2：達成</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>定着度</strong></td>
-              <td>業務で使っていない</td>
-              <td>週1回未満</td>
-              <td>週3回以上</td>
-            </tr>
-            <tr>
-              <td><strong>再現度</strong></td>
-              <td>資料を見ても再現不可</td>
-              <td>資料を見れば再現可</td>
-              <td>資料なしで再現可</td>
-            </tr>
-            <tr>
-              <td><strong>横展開</strong></td>
-              <td>自分も使えていない</td>
-              <td>自分は使えるが指導は困難</td>
-              <td>他部署へ展開可能</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="prompt-tip">実施タイミング：受講後 1週間 / 1ヶ月 / 3ヶ月 の3回。1人あたり合計0〜6点。</p>
       </section>
 
       <section>
