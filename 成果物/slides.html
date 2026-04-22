@@ -509,8 +509,7 @@
     /* ================================================
        プロンプト埋め込みカード
        ================================================ */
-    .reveal .prompt-card { text-align: left; }
-    .reveal .prompt-card h2 { margin-bottom: 0.25em; }
+    /* prompt-card は通常sectionと同じスタイル感に寄せる（text-align:left や h2調整は廃止） */
     .reveal .prompt-card > p { font-size: 0.72em; color: #333; margin: 0.3em 0 0.5em; }
     .reveal .prompt-card h4 {
       font-size: 0.65em;
@@ -1294,8 +1293,6 @@
             一度サインアウトして再度サインインすると改善する場合があります</li>
           <li>&#x1F512; <strong>オプトアウト設定</strong><br>
             利用設定で「コードをGoogleの学習に使わせない（オプトアウト）」が可能。機密情報を扱う場合は必ずオフに</li>
-          <li>&#x1F4C2; <strong>一度ファイルを作成すると</strong><br>
-            エージェントモードを使わなくても、既存ファイルに対する編集・追加指示が通るようになる場合があります</li>
           <li>&#x274C; <strong>生成結果のリジェクト（却下）</strong><br>
             AIが提案した変更が気に入らないときは「拒否（Reject）」して再依頼できます。無理に採用せず、何度でも作り直せます</li>
         </ul>
@@ -1333,12 +1330,7 @@
 修正してください。
 
 【エラー文】
-(ここにエラーメッセージをそのまま貼る)
-
-【やろうとしていたこと】
-- ○○を表示したかった
-
-修正したコードを出してください。</code></pre>
+(ここにエラーメッセージをそのまま貼る)</code></pre>
           </div>
           <div class="column">
             <h3>② 症状と期待をセットで送る</h3>
@@ -1373,15 +1365,12 @@
           <li>うまくいかない時は<strong>エラーをAIに見せて</strong>修正依頼</li>
           <li>この流れを使って、午後後半で<strong>ゲーム</strong>を作ります!</li>
         </ul>
-        <div class="info-card">
-          <p><strong>ポイント:</strong> AIは「一発で完璧に作る道具」ではなく、<strong>作って → 試して → 直す</strong>相棒です。</p>
-        </div>
       </section>
 
-      <!-- プロンプト埋め込み: 4.5末尾 業務系プロンプト -->
+      <!-- 業務系Java: 前半レイアウトと統一 -->
       <section class="prompt-card">
         <h2>業務系Javaもいける</h2>
-        <p>日本語で要件を書くだけで、Spring Boot の業務ロジックが一気に生成されます。</p>
+        <h3>日本語で要件を書くだけで、Spring Bootの業務ロジックが生成</h3>
         <div class="prompt-wrap">
           <button class="copy-btn" data-target="p-java">コピー</button>
 <pre id="p-java">あなたはSpring Bootの実務経験豊富なエンジニアです。
@@ -1397,59 +1386,45 @@
 【前提】
 - Lombok使用、Null安全、Optional使用、例外クラスも作成</pre>
         </div>
-        <p class="prompt-tip">コツ：社内のコーディング規約を一緒に渡すと精度が跳ねます。生成結果は必ず目視レビューを。</p>
-      </section>
-
-      <section class="prompt-card">
-        <h2>詳細設計書 → テストコード</h2>
-        <p>設計書（Word / Excel / PDF）を渡せば、JUnit5 + Mockito のテストが自動生成できます。</p>
-        <div class="prompt-cols">
-          <div>
-            <h4>サンプル設計書</h4>
-            <div class="prompt-wrap">
-              <button class="copy-btn" data-target="p-spec">コピー</button>
-<pre id="p-spec"># 詳細設計書：ログイン機能
-
-## 入力
-- userId: 半角英数 4〜20文字（必須）
-- password: 半角英数記号 8〜32文字（必須）
-
-## 処理
-1. 入力ルール検証
-2. DBで userId 存在確認
-3. BCryptハッシュ照合
-4. 成功なら JWT 発行
-5. 失敗カウンタ+1、5回でロック
-
-## 出力
-- 200: 成功＋JWT
-- 400: 形式不正
-- 401: 認証失敗
-- 423: ロック中</pre>
-            </div>
-          </div>
-          <div>
-            <h4>テスト生成プロンプト</h4>
-            <div class="prompt-wrap">
-              <button class="copy-btn" data-target="p-testgen">コピー</button>
-<pre id="p-testgen">上記の詳細設計書に基づき、
-以下の観点を網羅する JUnit5 + Mockito の
-テストコードを書いてください。
-
-- 正常系：3ケース
-- バリデーションエラー：5ケース（境界値含む）
-- 認証失敗：1ケース
-- ロック状態：1ケース
-- 5回失敗でロック：1ケース
-
-対象：LoginService.login(String userId, String password)
-@Nested で観点別に整理、日本語テスト名で。</pre>
-            </div>
-          </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>コツ: 社内のコーディング規約を一緒に渡すと精度が跳ねます。生成結果は必ず目視レビューを</p>
         </div>
       </section>
 
-      <!-- 指摘: GitLab連携 → GitLabの概要と主な機能に差し替え -->
+      <!-- 出力したJavaのテストコードを続けて生成（社長指示 2026-04-18） -->
+      <section class="prompt-card">
+        <h2>続けてテストコードも作れる</h2>
+        <h3>Javaコード出力後、同じ会話で指示するだけ</h3>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-testgen">コピー</button>
+<pre id="p-testgen">出力したJava処理のテストコードを作ってください。
+
+- JUnit5 + Mockito を使用
+- 正常系・異常系・境界値を網羅
+- @Nested で観点別に整理、日本語のテストメソッド名で</pre>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>同じコンテキスト（会話の続き）で指示するので、コードを貼り直す必要がありません</p>
+        </div>
+      </section>
+
+      <!-- Git の概要（GitLab説明の前置き、社長指示 2026-04-18） -->
+      <section>
+        <h2>Git ― バージョン管理システム</h2>
+        <h3>AIとの相性が抜群に良いツール</h3>
+        <ul>
+          <li>&#x1F4DC; <strong>履歴管理</strong> ― いつ・誰が・どこを変更したかを追跡</li>
+          <li>&#x1F33F; <strong>ブランチ</strong> ― 変更を分岐させ、並行して試行錯誤できる</li>
+          <li>&#x1F504; <strong>巻き戻し</strong> ― どの時点にも瞬時に戻せる</li>
+          <li>&#x1F465; <strong>共同開発</strong> ― チームで同じコードベースを安全に共有</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>AIが生成したコードを一旦コミット → 壊れたらすぐ戻せる。<br>
+            <code>git diff</code>でAIの「やりすぎ」をチェックできる ― <strong>AI時代の必須スキル</strong></p>
+        </div>
+      </section>
+
+      <!-- GitLabの概要と主な機能 -->
       <section>
         <h2>GitLab ― 開発の統合プラットフォーム</h2>
         <h3>Gitリポジトリを中心に、開発〜運用までを1つに</h3>
@@ -1525,10 +1500,10 @@
         </blockquote>
       </section>
 
-      <!-- プロンプト埋め込み: 4.6末尾 翻訳・図生成 -->
+      <!-- 業務翻訳: 前半レイアウトと統一 -->
       <section class="prompt-card">
         <h2>業務翻訳 ― 用語を固定する</h2>
-        <p>DeepL で下訳 → LLM で用語統一と文体整形。用語集を渡すだけで品質が跳ねます。</p>
+        <h3>DeepLで下訳 → LLMで用語統一と文体整形</h3>
         <div class="prompt-wrap">
           <button class="copy-btn" data-target="p-translate">コピー</button>
 <pre id="p-translate">以下の英語技術文書を日本語に翻訳してください。
@@ -1548,12 +1523,15 @@
 【原文】
 (ここに英文を貼る)</pre>
         </div>
-        <p class="prompt-tip">議事録・社内マニュアル・技術文書で、月数十時間の削減事例あり。</p>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>議事録・社内マニュアル・技術文書で、月数十時間の削減事例あり</p>
+        </div>
       </section>
 
+      <!-- 図の自動生成: 前半レイアウトと統一 -->
       <section class="prompt-card">
         <h2>図の自動生成 ― Mermaid / drawio</h2>
-        <p>文章指示から即、シーケンス図・ER図・クラス図が作れます。議事録直後に図化するのに便利。</p>
+        <h3>文章指示からシーケンス図・ER図・クラス図が作れる</h3>
         <div class="prompt-wrap">
           <button class="copy-btn" data-target="p-mermaid">コピー</button>
 <pre id="p-mermaid">以下の業務フローを Mermaid のシーケンス図で書いてください。
@@ -1574,7 +1552,9 @@
 
 出力は mermaid コードブロックだけで。</pre>
         </div>
-        <p class="prompt-tip">「drawio の XML 形式で出して」と指示すれば drawio にそのまま貼り付けて編集可能です。</p>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>「drawioのXML形式で出して」と指示すれば、drawioにそのまま貼り付けて編集可能</p>
+        </div>
       </section>
 
       <!-- ============================================================
