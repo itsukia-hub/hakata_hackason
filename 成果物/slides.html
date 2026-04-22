@@ -1,0 +1,2512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博多ハッカソン AI研修ワークショップ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <style>
+    /* ================================================
+       カスタムテーマ: 白ベース・モノトーン・シンプル
+       ================================================ */
+    :root {
+      --r-background-color: #ffffff;
+      --r-main-color: #1a1a1a;
+      --r-heading-color: #1a1a1a;
+      --r-link-color: #555555;
+      --r-link-color-hover: #333333;
+      --r-selection-background-color: #d0d0d0;
+      --r-selection-color: #1a1a1a;
+    }
+
+    .reveal-viewport {
+      background: #ffffff;
+    }
+
+    .reveal {
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      font-size: 1.15em;
+      color: #1a1a1a;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .reveal .slides section {
+      box-sizing: border-box;
+    }
+
+    .reveal h1 {
+      font-size: 2.5em;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin-bottom: 0.3em;
+      letter-spacing: 0.02em;
+    }
+
+    .reveal h2 {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.28em;
+      line-height: 1.3;
+      border-bottom: 3px solid #333333;
+      padding-bottom: 0.15em;
+      display: inline-block;
+    }
+
+    .reveal h3 {
+      font-size: 1.25em;
+      font-weight: 600;
+      color: #333333;
+      margin: 0.16em 0 0.32em;
+      line-height: 1.52;
+    }
+
+    .reveal p,
+    .reveal li {
+      color: #333333;
+      line-height: 1.68;
+    }
+
+    .reveal p {
+      margin: 0.22em 0;
+    }
+
+    .reveal ul {
+      list-style: none;
+      padding-left: 0;
+      width: fit-content;
+      max-width: min(100%, 920px);
+      margin: 0.85em auto 0;
+      text-align: left;
+    }
+
+    .reveal ul li {
+      position: relative;
+      padding-left: 1.55em;
+      margin-bottom: 0.5em;
+      text-align: left;
+    }
+
+    .reveal ul li::before {
+      content: "\25B8";
+      position: absolute;
+      left: 0.1em;
+      top: 0.12em;
+      color: #555555;
+      font-size: 0.9em;
+    }
+
+    /* ネストしたli（子リスト）のスタイル */
+    .reveal ul ul {
+      width: auto;
+      max-width: none;
+      margin: 0.3em 0 0.15em;
+      padding-left: 1.05em;
+    }
+    .reveal ul ul li {
+      padding-left: 1.1em;
+      margin-bottom: 0.3em;
+    }
+    .reveal ul ul li::before {
+      content: "\25E6";
+      left: 0;
+      top: 0.15em;
+    }
+
+    .reveal table {
+      margin: 0.55em auto;
+      border-collapse: collapse;
+      font-size: 0.82em;
+    }
+
+    .reveal table th {
+      background: #1a1a1a;
+      color: #ffffff;
+      padding: 0.5em 1em;
+      font-weight: 600;
+    }
+
+    .reveal table td {
+      padding: 0.45em 0.9em;
+      border-bottom: 1px solid #d0d0d0;
+      color: #333333;
+    }
+
+    .reveal table tr:nth-child(even) td {
+      background: #f7f7f7;
+    }
+
+    .reveal .slide-number {
+      color: #555555;
+      font-size: 0.55em;
+    }
+
+    .reveal .progress span {
+      background: #333333;
+    }
+
+    .reveal blockquote {
+      background: #f7f7f7;
+      border-left: 4px solid #555555;
+      padding: 0.7em 1.2em;
+      margin: 0.5em 0;
+      font-style: normal;
+      color: #333333;
+      font-size: 0.95em;
+    }
+
+    .reveal code {
+      background: #f0f0f0;
+      padding: 0.12em 0.4em;
+      border-radius: 3px;
+      font-size: 0.88em;
+      color: #1a1a1a;
+      font-family: "SFMono-Regular", "Consolas", "Menlo", "Monaco", monospace;
+    }
+
+    .reveal pre {
+      width: 90%;
+      margin: 0.4em auto;
+      position: relative;
+    }
+
+    .reveal pre code {
+      display: block;
+      background: #f7f7f7;
+      border: 1px solid #d8d8d8;
+      border-radius: 12px;
+      padding: 1.1em 1.1em 1em;
+      font-size: 0.66em;
+      line-height: 1.6;
+      color: #16202a;
+      text-align: left;
+      white-space: pre;
+      word-break: normal;
+      overflow-wrap: normal;
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 360px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .reveal pre.prompt-block code {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: 1.08em 2.3em 1.12em 1em;
+      font-size: 0.68em;
+      line-height: 1.84;
+      max-height: none;
+    }
+
+    .reveal pre.copy-ready {
+      filter: none;
+    }
+
+    .reveal pre.prompt-block {
+      width: min(50%, 540px);
+      margin: 0.34em auto;
+    }
+
+    .reveal pre.code-example-block {
+      display: table;
+      width: auto;
+      max-width: min(60%, 680px);
+    }
+
+    .reveal pre.code-example-block code {
+      padding: 1.1em 3.1em 1.08em 1.1em;
+      line-height: 1.72;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 0.85em;
+      right: 0.85em;
+      z-index: 2;
+      border: none;
+      border-radius: 999px;
+      background: #1a1a1a;
+      color: #ffffff;
+      font-size: 0.45em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 0.55em 0.95em;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .copy-button:hover {
+      background: #333333;
+      transform: translateY(-1px);
+    }
+
+    .copy-button.is-copied {
+      background: #0b8f5d;
+    }
+
+    .copy-note {
+      font-size: 0.72em;
+      color: #666666;
+      margin-top: 0.25em;
+      text-align: right;
+      width: min(50%, 540px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .info-card {
+      background: #fafafa;
+      border: 1px solid #d7d7d7;
+      border-radius: 12px;
+      padding: 0.9em 1.1em;
+      margin-top: 0.7em;
+      text-align: left;
+    }
+
+    .info-card p {
+      margin: 0.2em 0;
+    }
+
+    .small-table td,
+    .small-table th {
+      font-size: 0.92em;
+    }
+
+    /* --- セクションアイコン --- */
+    .slide-icon {
+      font-size: 3.5em;
+      margin-bottom: 0.2em;
+      line-height: 1;
+      filter: grayscale(100%);
+      opacity: 0.85;
+    }
+
+    /* --- タイトルスライド --- */
+    .title-slide h1 { font-size: 2.2em; margin-bottom: 0.15em; }
+    .reveal .slides section.title-slide,
+    .reveal .slides section.break-slide,
+    .reveal .slides section.section-title {
+      height: 100%;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .title-slide .subtitle {
+      font-size: 1.05em;
+      color: #555555;
+      margin-top: 0.4em;
+      font-weight: 500;
+    }
+    .title-slide .meta {
+      font-size: 0.8em;
+      color: #555555;
+      margin-top: 1.8em;
+      line-height: 1.8;
+    }
+
+    /* --- 休憩スライド --- */
+    .break-slide { text-align: center; }
+    .break-slide h2 {
+      border-bottom: none;
+      font-size: 2.2em;
+      color: #555555;
+    }
+    .break-slide p {
+      font-size: 1.05em;
+      color: #555555;
+    }
+
+    /* --- セクション区切り --- */
+    .section-title { text-align: center; }
+    .section-title h2 { border-bottom: none; font-size: 1.8em; }
+    .section-title .section-number {
+      font-size: 3em;
+      font-weight: 900;
+      color: #555555;
+      line-height: 1;
+      margin-bottom: 0.1em;
+    }
+
+    /* --- 比較カラム --- */
+    .columns {
+      display: flex;
+      gap: 1.8em;
+      justify-content: center;
+      margin-top: 0.7em;
+    }
+    .column { flex: 1; max-width: 46%; }
+
+    .list-image-row {
+      display: grid;
+      grid-template-columns: minmax(0, 520px) clamp(220px, 21vw, 280px);
+      gap: 0.18em;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: min(82%, 820px);
+      margin: 0.28em auto 0;
+    }
+    .list-image-row > ul {
+      width: min(100%, 520px);
+      max-width: 520px;
+      margin: 0;
+    }
+    .list-image-row > .slide-photo {
+      width: clamp(220px, 21vw, 280px);
+      max-width: 280px;
+      max-height: 280px;
+      margin: 0;
+      justify-self: center;
+    }
+
+    /* --- 強調ボックス --- */
+    .highlight-box {
+      background: #f5f5f5;
+      border: 2px solid #555555;
+      border-radius: 8px;
+      padding: 0.68em 1.15em;
+      margin: 0.48em auto;
+      max-width: 80%;
+      text-align: center;
+    }
+    .highlight-box p {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.05em;
+      color: #1a1a1a;
+    }
+
+    /* --- ワークカード --- */
+    .work-card {
+      background: #f9f9f9;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      padding: 0.8em 1.2em;
+      margin: 0.4em 0;
+      text-align: left;
+    }
+    .work-card .label {
+      font-size: 0.7em;
+      font-weight: 700;
+      color: #555555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25em;
+    }
+
+    .reveal .slides section.work-list-slide {
+      top: 0 !important;
+      transform: none !important;
+      padding-top: 0.35em;
+      box-sizing: border-box;
+    }
+    .work-list-slide h2 {
+      margin-bottom: 0.2em;
+    }
+    .work-list-slide > p {
+      margin: 0.2em 0 0.55em;
+    }
+    .work-list-slide .work-card {
+      width: min(68%, 760px);
+      box-sizing: border-box;
+      padding: 0.58em 0.95em;
+      margin: 0.24em auto;
+      border-radius: 8px;
+    }
+    .work-list-slide .work-card .label {
+      margin-bottom: 0.12em;
+    }
+    .work-list-slide .work-card p {
+      margin: 0.08em 0 0;
+      font-size: 0.94em;
+      line-height: 1.55;
+    }
+
+    /* --- 番号付きリスト --- */
+    .reveal ol {
+      width: fit-content;
+      max-width: min(100%, 920px);
+      margin: 0.85em auto 0;
+      padding-left: 0;
+      counter-reset: item;
+      list-style: none;
+      text-align: left;
+    }
+    .reveal ol li {
+      position: relative;
+      padding-left: 2.1em;
+      margin-bottom: 0.55em;
+      counter-increment: item;
+      text-align: left;
+    }
+    .reveal ol li:last-child {
+      margin-bottom: 0;
+    }
+    .reveal ol li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0.1em;
+      width: 1.35em;
+      height: 1.35em;
+      background: #1a1a1a;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 0.65em;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0.18em;
+    }
+
+    /* --- ステップバッジ --- */
+    .step-badge {
+      display: inline-block;
+      background: #1a1a1a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.7em;
+      padding: 0.2em 0.8em;
+      border-radius: 3px;
+      margin-bottom: 0.3em;
+      letter-spacing: 0.05em;
+    }
+
+    /* --- プレースホルダー通知 --- */
+    .placeholder-notice {
+      background: #f0f0f0;
+      border: 2px dashed #999999;
+      border-radius: 6px;
+      padding: 0.5em 1em;
+      margin: 0.5em auto;
+      color: #555555;
+      font-size: 0.8em;
+      text-align: center;
+      max-width: 85%;
+    }
+
+    /* --- カスタマイズ表 --- */
+    .customize-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .customize-table td:nth-child(2) { text-align: center; white-space: nowrap; }
+
+    /* --- アジェンダ表 --- */
+    .agenda-table td:first-child { font-weight: 600; white-space: nowrap; color: #1a1a1a; }
+
+    /* --- Unsplash画像（モノトーン統一） --- */
+    .slide-photo {
+      filter: grayscale(100%);
+      opacity: 0.75;
+      border-radius: 8px;
+      object-fit: cover;
+      margin: 0.4em auto 0;
+      display: block;
+    }
+
+    /* ================================================
+       プロンプト埋め込みカード
+       ================================================ */
+    .reveal .prompt-card { text-align: left; }
+    .reveal .prompt-card h2 { margin-bottom: 0.25em; }
+    .reveal .prompt-card > p { font-size: 0.72em; color: #333; margin: 0.3em 0 0.5em; }
+    .reveal .prompt-card h4 {
+      font-size: 0.65em;
+      font-weight: 700;
+      margin: 0.2em 0 0.25em;
+      color: #1a1a1a;
+      letter-spacing: 0.02em;
+    }
+    .reveal .prompt-wrap {
+      position: relative;
+      margin: 0.3em 0 0.5em;
+    }
+    .reveal .prompt-wrap pre {
+      background: #f7f7f7;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+      padding: 0.7em 0.9em;
+      font-family: "SFMono-Regular", "Consolas", "Menlo", "Monaco", monospace;
+      font-size: 0.42em;
+      line-height: 1.55;
+      margin: 0;
+      text-align: left;
+      white-space: pre-wrap;
+      word-break: break-word;
+      max-height: 10.5em;
+      overflow-y: auto;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+    }
+    .reveal .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #ffffff;
+      border: 1px solid #1a1a1a;
+      color: #1a1a1a;
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      font-size: 0.5em;
+      font-weight: 700;
+      padding: 0.15em 0.75em;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s, color 0.15s;
+    }
+    .reveal .copy-btn:hover {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+    .reveal .copy-btn.copied {
+      background: #0b8f5d;
+      color: #ffffff;
+      border-color: #0b8f5d;
+    }
+    .reveal .prompt-tip {
+      font-size: 0.55em;
+      color: #555;
+      margin: 0.2em 0 0;
+      padding: 0.4em 0.7em;
+      background: #f7f7f7;
+      border-left: 3px solid #333333;
+      border-radius: 0 3px 3px 0;
+    }
+    .reveal .prompt-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8em;
+    }
+
+    /* --- ヘルプテーブル --- */
+    .reveal .help-table {
+      font-size: 0.55em;
+    }
+    .reveal .help-table th,
+    .reveal .help-table td {
+      padding: 0.4em 0.6em;
+    }
+
+    /* --- トグル（正解行動・想定コード折りたたみ） --- */
+    .reveal details {
+      margin: 0.35em 0 0;
+      text-align: left;
+    }
+    .reveal details summary {
+      cursor: pointer;
+      font-size: 0.62em;
+      font-weight: 700;
+      color: #1a1a1a;
+      padding: 0.3em 0.6em;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      list-style: none;
+      user-select: none;
+    }
+    .reveal details summary::-webkit-details-marker {
+      display: none;
+    }
+    .reveal details summary::before {
+      content: "\25B6\00a0";
+      font-size: 0.8em;
+    }
+    .reveal details[open] summary::before {
+      content: "\25BC\00a0";
+    }
+    .reveal details[open] summary {
+      border-radius: 4px 4px 0 0;
+      border-bottom: none;
+    }
+    .reveal details .toggle-body {
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      padding: 0.5em 0.7em;
+      font-size: 0.48em;
+      line-height: 1.55;
+      max-height: 14em;
+      overflow-y: auto;
+      text-align: left;
+    }
+    .reveal details .toggle-body pre {
+      background: #f7f7f7;
+      border: 1px solid #d8d8d8;
+      border-radius: 6px;
+      padding: 0.5em;
+      font-family: "SFMono-Regular", "Consolas", "Menlo", "Monaco", monospace;
+      font-size: 0.95em;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0.3em 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ============================================================
+           タイトルスライド
+           ============================================================ -->
+      <section class="title-slide" style="text-align: center;">
+        <div class="slide-icon">&#x1F916;</div>
+        <h1>博多ハッカソン<br>AI研修ワークショップ</h1>
+        <p class="subtitle">AIを知る・触れる・作る 1日体験</p>
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=180&fit=crop" alt="Technology workshop" class="slide-photo" style="width: 45%; max-height: 160px; margin-top: 0.3em;">
+        <p class="meta">
+          開催: 2026年4月23日〜27日 | 11:00 - 17:00<br>
+          対象: AI初心者 - 中級者<br>
+          主催: itnav
+        </p>
+      </section>
+
+      <!-- ============================================================
+           アジェンダ（タイムテーブル）
+           ============================================================ -->
+      <section>
+        <h2>本日のタイムテーブル</h2>
+        <table class="agenda-table" style="font-size: 0.75em;">
+          <thead>
+            <tr><th>時間</th><th>内容</th><th>形式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>11:00 - 11:05</td><td>開会挨拶</td><td>-</td></tr>
+            <tr><td>11:05 - 11:20</td><td>オープニング &amp; アイスブレイク</td><td>ワーク</td></tr>
+            <tr><td>11:20 - 11:40</td><td>AI基礎・活用事例紹介</td><td>講義</td></tr>
+            <tr><td>11:40 - 11:50</td><td style="color:#888;">休憩</td><td>-</td></tr>
+            <tr><td>11:50 - 12:45</td><td>代表的な生成AIに触れてみる</td><td>講義 + ハンズオン</td></tr>
+            <tr><td>12:45 - 13:00</td><td>AIを使う上でのポイント</td><td>講義</td></tr>
+            <tr><td>13:00 - 14:00</td><td style="color:#888;">昼休み</td><td>-</td></tr>
+            <tr><td>14:00 - 14:30</td><td>AIエージェントの活用</td><td>講義 + ハンズオン</td></tr>
+            <tr><td>14:30 - 15:00</td><td>特化型AIツール体験</td><td>講義 + デモ</td></tr>
+            <tr><td>15:00 - 15:10</td><td style="color:#888;">休憩</td><td>-</td></tr>
+            <tr><td>15:10 - 16:00</td><td>鬼ごっこ大作戦（前半）</td><td>ハンズオン</td></tr>
+            <tr><td>16:00 - 16:10</td><td style="color:#888;">休憩</td><td>-</td></tr>
+            <tr><td>16:10 - 16:50</td><td>鬼ごっこ大作戦（後半 &amp; 発展）</td><td>ハンズオン</td></tr>
+            <tr><td>16:50 - 17:00</td><td>振り返り &amp; クロージング</td><td>全体</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           セクション 1: オープニング＆アイスブレイク
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F91D;</div>
+        <div class="section-number">1</div>
+        <h2>オープニング &amp;<br>アイスブレイク</h2>
+        <p>11:05 - 11:20（15分）</p>
+      </section>
+
+      <section>
+        <h2>自己紹介タイム</h2>
+        <p>グループ内で一人ずつ自己紹介しましょう</p>
+        <div class="highlight-box">
+          <p>名前 / 所属 / 最近ハマっていること</p>
+        </div>
+        <p style="margin-top: 0.8em; font-size: 0.85em; color: #555555;">目安: お一人 30秒 - 1分</p>
+      </section>
+
+      <!-- 指摘#1〜#3: ペーパータワー修正 -->
+      <section>
+        <h2>ペーパータワー</h2>
+        <h3>グループ対抗! 最も高いタワーを作ろう</h3>
+        <div class="list-image-row" style="margin-top: 0.4em;">
+          <ul>
+            <li>使えるのは <strong>A4用紙のみ</strong>（テープ・のり不可）</li>
+            <li>折る・丸めるは <strong>OK</strong> / ちぎるは <strong>NG</strong></li>
+            <li>手を離して<strong>自立する高さ</strong>で勝負</li>
+            <li>全員が最低1枚は紙に触ること</li>
+          </ul>
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=320&h=360&fit=crop" alt="Teamwork" class="slide-photo">
+        </div>
+        <table style="margin-top: 0.6em;">
+          <thead>
+            <tr><th>フェーズ</th><th>内容</th><th>時間</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>作戦タイム</strong></td><td>グループで相談（紙に触ってOK）</td><td>1分</td></tr>
+            <tr><td><strong>組み立て</strong></td><td>本番! タワーを建てる</td><td>3分</td></tr>
+            <tr><td><strong>計測タイム</strong></td><td>手を離して高さを計測</td><td>1分</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ============================================================
+           セクション 2: AI基礎・活用事例紹介
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F4CA;</div>
+        <div class="section-number">2</div>
+        <h2>AI基礎・活用事例紹介</h2>
+        <p>11:20 - 11:40（20分）</p>
+      </section>
+
+      <section>
+        <h2>AIはどのくらい使われている?</h2>
+        <h3>企業のAI導入率の推移</h3>
+        <ul>
+          <li>国内企業のAI導入率は年々増加</li>
+          <li>製造・金融・小売など幅広い業界で活用</li>
+          <li>生成AI登場後、導入ペースがさらに加速</li>
+        </ul>
+        <div class="highlight-box">
+          <p>皆さんは普段AIを使っていますか?</p>
+        </div>
+      </section>
+
+      <!-- 指摘#5: 身近なAI活用例を最新化 -->
+      <section>
+        <h2>身近なAIの活用例（2026年版）</h2>
+        <ul>
+          <li><strong>ChatGPT / Gemini / Claude</strong> ― 質問・文章作成・翻訳・要約が1つのチャットで完結</li>
+          <li><strong>Microsoft Copilot</strong> ― Word・Excel・PowerPointに組み込まれ、資料作成を自然言語で指示</li>
+          <li><strong>スマホのAIカメラ</strong> ― 消しゴムマジック、暗所補正、ベストショット合成</li>
+          <li><strong>AI音声文字起こし</strong> ― 会議をリアルタイムで文字起こし・要約（Notta / CLOVA Note）</li>
+          <li><strong>AI画像・動画・音楽</strong> ― テキスト指示だけで商用レベルのコンテンツを生成</li>
+          <li><strong>自動配送ロボット</strong> ― 東京都心で歩道を走り商品を届ける。自動運転タクシーも現実に</li>
+        </ul>
+        <p style="color: #555; font-size: 0.85em;">Siri や Google翻訳の時代を超え、AIは「使っていることすら意識しない」レベルに</p>
+      </section>
+
+      <!-- 指摘#6: 業種別事例追加 (1) -->
+      <section>
+        <h2>業種別 AI活用の最前線 (1)</h2>
+        <table style="font-size: 0.85em;">
+          <thead><tr><th>業種</th><th>事例</th><th>インパクト</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>金融</strong></td>
+              <td>三井住友FG「SMBC-GAI」130万件学習のRAGアシスタント</td>
+              <td>生成AI投資500億円</td>
+            </tr>
+            <tr>
+              <td><strong>製造</strong></td>
+              <td>竹中工務店「デジタル棟梁」建築画像→ヒビ・サビ自動検出</td>
+              <td>ドローン測量コスト70%減</td>
+            </tr>
+            <tr>
+              <td><strong>医療</strong></td>
+              <td>東芝 ― 1年の健診データから6年先の6疾病リスクを予測</td>
+              <td>保健指導の精度向上</td>
+            </tr>
+            <tr>
+              <td><strong>教育</strong></td>
+              <td>佐賀県・川登中 ― GPT-4で英語40名に個別フィードバック</td>
+              <td>全員が最低3回の練習機会</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.65em; color: #999; margin-top: 0.3em;">
+          参考: mobilus.co.jp | cad-kenkyujo.com | ai-souken.com | shift-ai.co.jp
+        </p>
+      </section>
+
+      <!-- 指摘#6: 業種別事例追加 (2) -->
+      <section>
+        <h2>業種別 AI活用の最前線 (2)</h2>
+        <table style="font-size: 0.85em;">
+          <thead><tr><th>業種</th><th>事例</th><th>インパクト</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>自治体</strong></td>
+              <td>善通寺市 ― 衛星写真×AIで固定資産税の課税変化を自動検出</td>
+              <td>職員の現地調査負担を大幅軽減</td>
+            </tr>
+            <tr>
+              <td><strong>小売</strong></td>
+              <td>ファミマ500店舗 AI発注 / セブン全社員8,000人にLLM基盤</td>
+              <td>議事録40分→10分</td>
+            </tr>
+            <tr>
+              <td><strong>物流</strong></td>
+              <td>アスクル ― 日本初の自動フォークリフト×自動エレベーター連携</td>
+              <td>倉庫内の完全自動化</td>
+            </tr>
+            <tr>
+              <td><strong>IT開発</strong></td>
+              <td>富士通「Takane」― AIが要件定義→テストまで全工程を実行</td>
+              <td>3人月→4時間（100倍）</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size: 0.65em; color: #999; margin-top: 0.3em;">
+          参考: techtouch.jp | exawizards.com | ai-market.jp | global.fujitsu
+        </p>
+      </section>
+
+      <section>
+        <h2>生成AIの登場と変化</h2>
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=700&h=160&fit=crop" alt="AI technology evolution" class="slide-photo" style="width: 55%; max-height: 130px; margin-bottom: 0.2em;">
+        <table>
+          <thead>
+            <tr><th>段階</th><th>特徴</th><th>できること</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ルールベース</td><td>人がルールを記述</td><td>条件分岐の自動処理</td></tr>
+            <tr><td>機械学習</td><td>データからパターンを学習</td><td>分類・予測</td></tr>
+            <tr><td>深層学習</td><td>大量データで高精度化</td><td>画像認識・音声認識</td></tr>
+            <tr><td><strong>生成AI</strong></td><td>新しいコンテンツを生成</td><td>テキスト・画像・コード・音楽</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 指摘#7: 生成AIでできることに画像挿入ガイド -->
+      <section>
+        <h2>生成AIでできること</h2>
+        <div class="columns">
+          <div class="column">
+            <ul>
+              <li><strong>テキスト生成</strong><br>文章作成、要約、翻訳</li>
+              <li><strong>画像生成</strong><br>イラスト、デザイン</li>
+              <li><strong>コード生成</strong><br>プログラミング支援</li>
+            </ul>
+          </div>
+          <div class="column">
+            <ul>
+              <li><strong>音楽生成</strong><br>BGM、楽曲制作</li>
+              <li><strong>動画生成</strong><br>映像コンテンツ制作</li>
+              <li><strong>データ分析</strong><br>グラフ作成、傾向分析</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 画像挿入ガイド: 各カテゴリの代表スクリーンショットを下に横並びで配置してください -->
+        <div class="placeholder-notice">
+          画像挿入エリア: テキスト生成 / 画像生成 / コード生成 / 音楽生成 / 動画生成 / データ分析<br>
+          各カテゴリの代表スクリーンショットを横に配置してください
+        </div>
+      </section>
+
+      <!-- ============================================================
+           休憩: 11:40 - 11:50
+           ============================================================ -->
+      <section class="break-slide">
+        <div class="slide-icon">&#x2615;</div>
+        <h2>休憩</h2>
+        <p>11:40 - 11:50（10分）</p>
+        <p style="margin-top: 1.2em;">次のセッションでは<br>実際に生成AIを触ってみます</p>
+      </section>
+
+      <!-- ============================================================
+           セクション 3: 代表的な生成AIに触れてみる
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F4BB;</div>
+        <div class="section-number">3</div>
+        <h2>代表的な生成AIに<br>触れてみる</h2>
+        <p>11:50 - 12:45（55分）</p>
+      </section>
+
+      <section>
+        <h2>3大生成AI</h2>
+        <img src="https://images.unsplash.com/photo-1531746790095-e5995fbb2c01?w=600&h=140&fit=crop" alt="AI chatbot assistant" class="slide-photo" style="width: 45%; max-height: 110px; margin-bottom: 0.15em;">
+        <table>
+          <thead>
+            <tr><th>サービス</th><th>提供元</th><th>特徴</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ChatGPT</strong></td>
+              <td>OpenAI</td>
+              <td>最も広く普及、汎用性が高い</td>
+            </tr>
+            <tr>
+              <td><strong>Claude</strong></td>
+              <td>Anthropic</td>
+              <td>長文理解に強い、丁寧な回答</td>
+            </tr>
+            <tr>
+              <td><strong>Gemini</strong></td>
+              <td>Google</td>
+              <td>Google連携、マルチモーダル対応</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="color: #555555; font-size: 0.82em; margin-top: 0.4em;">いずれも無料で利用可能（一部機能制限あり）</p>
+      </section>
+
+      <section class="work-list-slide">
+        <h2>ワーク: 3つのAIを比較しよう</h2>
+        <p>同じプロンプトを3つのAIに送って、回答を比べましょう</p>
+        <div class="work-card">
+          <div class="label">お題 1</div>
+          <p>「博多の観光スポットを5つ教えてください。<br>それぞれ100文字以内で紹介してください」</p>
+        </div>
+        <div class="work-card">
+          <div class="label">お題 2</div>
+          <p>「小学生にも分かるように、AIとは何かを説明してください」</p>
+        </div>
+        <div class="work-card">
+          <div class="label">お題 3</div>
+          <p>「『今日の天気は晴れです』を英語・中国語・韓国語に翻訳してください」</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>比較のポイント</h2>
+        <ul>
+          <li><strong>回答のわかりやすさ</strong> ― どのAIが一番理解しやすい?</li>
+          <li><strong>情報の正確さ</strong> ― 間違いはない?</li>
+          <li><strong>回答のスピード</strong> ― どのAIが一番速い?</li>
+          <li><strong>回答の長さ・詳しさ</strong> ― 丁寧? シンプル?</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.8em;">
+          <p>グループ内で結果を共有してみましょう</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>AIの使い分け早見表</h2>
+        <table class="small-table">
+          <thead>
+            <tr><th>AI</th><th>向いていること</th><th>最初の頼み方</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ChatGPT</strong></td>
+              <td>アイデア出し、たたき台、発想の広げ方</td>
+              <td>「3案ください」「初心者向けに」</td>
+            </tr>
+            <tr>
+              <td><strong>Claude</strong></td>
+              <td>長文の整理、丁寧な説明、比較・要約</td>
+              <td>「表で整理して」「理由も説明して」</td>
+            </tr>
+            <tr>
+              <td><strong>Gemini</strong></td>
+              <td>Google連携、画像込みの理解、VSCode連携</td>
+              <td>「このコードを修正して」「3ファイルで作って」</td>
+            </tr>
+            <tr>
+              <td><strong>NotebookLM</strong></td>
+              <td>配布資料やPDFをもとにした要約・QA</td>
+              <td>「この資料だけを根拠に答えて」</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>「何に使うか」でAIを選ぶと成功率が上がります</p>
+        </div>
+      </section>
+
+      <!-- 指摘#8: NotebookLM強化 -->
+      <section>
+        <h2>NotebookLM</h2>
+        <h3>ソースに基づいて回答するAI</h3>
+        <div class="columns">
+          <div class="column">
+            <ul>
+              <li>Googleが提供する<strong>資料特化型AI</strong></li>
+              <li>PDF・Webページなどをアップロードして質問できる</li>
+              <li>アップロードした資料の<strong>中身だけ</strong>を根拠に回答</li>
+              <li>根拠が明確なので<strong>ハルシネーションが起きにくい</strong></li>
+            </ul>
+          </div>
+          <div class="column" style="text-align: center;">
+            <!-- 画像挿入ガイド: NotebookLMの画面スクリーンショットをここに配置 -->
+            <div class="placeholder-notice" style="max-width: 100%; padding: 1.5em 1em;">
+              NotebookLM<br>画面イメージ
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>NotebookLMでできること</h2>
+        <table>
+          <thead>
+            <tr><th>できること</th><th>活用例</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>資料ベースのQ&amp;A</strong></td><td>社内規定集を読み込ませて「出張時の交通費精算ルール」を質問</td></tr>
+            <tr><td><strong>要約</strong></td><td>100ページの報告書を3行で要約</td></tr>
+            <tr><td><strong>ポッドキャスト生成</strong></td><td>資料をもとに音声での解説を自動生成</td></tr>
+            <tr><td><strong>比較分析</strong></td><td>複数のPDFを読み込んで共通点・相違点を分析</td></tr>
+          </tbody>
+        </table>
+        <blockquote>
+          目的に応じてAIを使い分けることが大事です
+        </blockquote>
+      </section>
+
+      <!-- ============================================================
+           セクション 4: AIを使う上でのポイント
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x26A0;</div>
+        <div class="section-number">4</div>
+        <h2>AIを使う上で<br>ここは押さえておきたい</h2>
+        <p>12:45 - 13:00（15分）</p>
+      </section>
+
+      <!-- 指摘#9: ハルシネーション2ページ化 (1) 概要 -->
+      <section>
+        <h2>ハルシネーション（幻覚）</h2>
+        <h3>AIが「もっともらしい嘘」をつく現象</h3>
+        <ul>
+          <li>存在しない本や論文を紹介してしまう</li>
+          <li>実在しないURLを生成してしまう</li>
+          <li>事実と異なる情報を<strong>自信満々に</strong>回答する</li>
+          <li>一見正しく見えるため<strong>気づきにくい</strong>のが厄介</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.8em;">
+          <p>重要な情報は必ず裏取りしましょう</p>
+        </div>
+      </section>
+
+      <!-- 指摘#9: ハルシネーション2ページ化 (2) 防御策 -->
+      <section>
+        <h2>ハルシネーション対策</h2>
+        <h3>AIの出力を信じすぎない ― 3つの防御策</h3>
+        <ol>
+          <li><strong>裏取りの習慣</strong><br>
+            <span style="font-size: 0.85em; color: #555;">重要な数値・固有名詞・URLは必ず元ソースで確認</span></li>
+          <li><strong>RAG（検索拡張生成）の活用</strong><br>
+            <span style="font-size: 0.85em; color: #555;">NotebookLMのように、手持ちの資料だけを根拠にさせるとハルシネーションが激減</span></li>
+          <li><strong>複数のAIでクロスチェック</strong><br>
+            <span style="font-size: 0.85em; color: #555;">ChatGPT / Claude / Gemini で同じ質問をし、回答が食い違ったら要注意</span></li>
+        </ol>
+        <div class="highlight-box" style="margin-top: 0.6em;">
+          <p>AIは「頼れるアシスタント」。ただし最終判断は自分でやる</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>コンテキストの重要性</h2>
+        <h3>背景情報を与えると回答品質が変わる</h3>
+        <div class="columns">
+          <div class="column">
+            <div class="work-card">
+              <div class="label" style="color: #999;">悪い例</div>
+              <p style="font-size: 0.88em;">「いい感じのメールを書いて」</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="work-card">
+              <div class="label">良い例</div>
+              <p style="font-size: 0.88em;">「取引先のA社に、来週の会議のリスケをお願いするメールを書いて。丁寧なトーンで」</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 0.7em; font-size: 0.82em; color: #555555;">
+          <strong>RAG（検索拡張生成）</strong>: AIに外部データを参照させて精度を上げる仕組み<br>
+          NotebookLMはこの仕組みを活用しています
+        </p>
+      </section>
+
+      <section>
+        <h2>プロンプトエンジニアリング入門</h2>
+        <h3>良い指示 = 良い回答</h3>
+        <ol>
+          <li><strong>役割を設定する</strong><br>
+            <code>「あなたはプロの翻訳者です」</code></li>
+          <li><strong>具体的に指示する</strong><br>
+            <code>「3つの案を箇条書きで」</code></li>
+          <li><strong>出力形式を指定する</strong><br>
+            <code>「表形式で」「JSON形式で」</code></li>
+        </ol>
+        <blockquote>
+          午後のハンズオンで、プロンプトの重要性を体感しましょう
+        </blockquote>
+      </section>
+
+      <!-- ============================================================
+           午前まとめ＆昼休み
+           ============================================================ -->
+      <section>
+        <h2>午前のまとめ</h2>
+        <ol>
+          <li>AIは身の回りに溢れていて、<strong>生成AI</strong>で大きく進化した</li>
+          <li>ChatGPT / Claude / Gemini それぞれに<strong>特徴</strong>がある</li>
+          <li>ハルシネーションに注意し、<strong>プロンプト</strong>の工夫が大事</li>
+        </ol>
+      </section>
+
+      <section class="break-slide">
+        <div class="slide-icon">&#x1F371;</div>
+        <h2>昼休み</h2>
+        <p>13:00 - 14:00（60分）</p>
+        <p style="margin-top: 1.2em; font-size: 1.05em;">午後はいよいよ<br><strong>AIエージェント</strong>と<strong>ゲーム作り</strong>に挑戦!</p>
+      </section>
+
+      <!-- ============================================================
+           セクション 5: AIエージェントの活用
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F9BE;</div>
+        <div class="section-number">5</div>
+        <h2>AIエージェントの活用</h2>
+        <p>14:00 - 14:30（30分）</p>
+      </section>
+
+      <!-- 講師用：冒頭おさらい約1分 -->
+      <section>
+        <h2>午前のおさらい: プロンプトのコツ</h2>
+        <ol>
+          <li><strong>役割を設定する</strong><br>
+            <code>「あなたはプロの翻訳者です」</code></li>
+          <li><strong>具体的に指示する</strong><br>
+            <code>「3つの案を箇条書きで」</code></li>
+          <li><strong>出力形式を指定する</strong><br>
+            <code>「表形式で」「JSON形式で」</code></li>
+        </ol>
+        <div class="highlight-box" style="margin-top: 0.6em;">
+          <p>午後はこのスキルを使って<br>実際にモノを作ります</p>
+        </div>
+      </section>
+
+      <!-- 指摘#10: チャット型→エージェント型 矛盾修正 -->
+      <section>
+        <h2>チャット型からエージェント型へ</h2>
+        <p style="font-size: 0.82em; color: #555; margin-bottom: 0.6em;">エージェント型はチャット機能を含んだ「上位の存在」です</p>
+        <div class="columns">
+          <div class="column">
+            <h3>チャット型AI</h3>
+            <ul>
+              <li>1回の質問に1回の回答</li>
+              <li>ユーザーが対話を主導</li>
+              <li>テキストベースのやり取り</li>
+            </ul>
+            <p style="font-size: 0.82em; color: #555555;">例: ChatGPT、Claudeのチャット</p>
+          </div>
+          <div class="column">
+            <h3>エージェント型AI</h3>
+            <ul>
+              <li>チャット機能 <strong>＋ 自律的な行動</strong></li>
+              <li>ファイルの読み書きも自動</li>
+              <li>コード生成 → テスト → 修正まで一気通貫</li>
+            </ul>
+            <p style="font-size: 0.82em; color: #555555;">例: Claude Code、Cursor、<br>Gemini Code Assist</p>
+          </div>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>エージェント型 = 「チャットもできるし、自分で考えて動くこともできる」AI</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>AIエージェントの3タイプ</h2>
+        <table>
+          <thead>
+            <tr><th>タイプ</th><th>特徴</th><th>代表例</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>チャット型</strong></td>
+              <td>1問1答のテキスト対話</td>
+              <td>ChatGPT、Claude</td>
+            </tr>
+            <tr>
+              <td><strong>コード補完型</strong></td>
+              <td>コーディング中にリアルタイム補完</td>
+              <td>GitHub Copilot</td>
+            </tr>
+            <tr>
+              <td><strong>エージェント型</strong></td>
+              <td>複数ファイルを跨いで自律的に生成・修正</td>
+              <td>Gemini Code Assist、<br>Claude Code、Cursor</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Gemini Code Assist</h2>
+        <h3>VSCodeで使える無料のAIエージェント</h3>
+        <ul>
+          <li><strong>Googleアカウント</strong>で無料利用可能</li>
+          <li>VSCodeの<strong>拡張機能</strong>として動作</li>
+          <li>3つの機能:
+            <ul>
+              <li><strong>コード補完</strong> ― 入力中に候補を提示</li>
+              <li><strong>チャット</strong> ― コードについて質問</li>
+              <li><strong>エージェントモード</strong> ― 自律的にコードを生成・編集</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>まずはこの型で頼む</h2>
+        <h3>コピペ用プロンプトテンプレ</h3>
+        <pre><code>あなたはやさしいWeb制作の先生です。
+初心者にも分かるように、○○を作ってください。
+
+条件:
+- HTML / CSS / JavaScript を使う
+- 必要なら index.html / style.css / game.js の3ファイルに分ける
+- 難しい書き方は避けて、シンプルにする
+- 変更したコードには短いコメントを入れる
+
+最後に必ず書いてほしいこと:
+- どのファイルに貼るか
+- 確認ポイントを3つ
+- うまくいかない時の見直しポイントを2つ</code></pre>
+        <p class="copy-note">右上の「コピー」でそのまま貼り付けできます</p>
+      </section>
+
+      <section class="work-list-slide">
+        <h2>ワーク: Gemini Code Assistを<br>使ってみよう</h2>
+        <p>VSCodeでGemini Code Assistを起動して、<br>以下のいずれかを試してみましょう</p>
+        <div class="work-card">
+          <div class="label">お題 1</div>
+          <p>「HTMLで自己紹介ページを作ってください。<br>名前、趣味、好きな食べ物を載せてください」</p>
+        </div>
+        <div class="work-card">
+          <div class="label">お題 2</div>
+          <p>「JavaScriptで今日の日付を表示する<br>プログラムを作ってください」</p>
+        </div>
+        <div class="work-card">
+          <div class="label">お題 3</div>
+          <p>「CSSで虹色のグラデーション背景を<br>作ってください」</p>
+        </div>
+        <p style="font-size: 0.85em; color: #555555; margin-top: 0.5em;">
+          Live Serverでブラウザ確認まで体験しましょう
+        </p>
+      </section>
+
+      <section>
+        <h2>詰まった時の再依頼テンプレ</h2>
+        <h3>症状と期待をセットで送る</h3>
+        <pre><code>今の作業で問題が起きています。
+
+やりたいこと:
+- ○○を表示したい / 動かしたい
+
+今起きていること:
+- 画面が真っ白
+- ボタンを押しても動かない
+- エラーが出ている
+
+エラー文:
+- ここにそのまま貼る
+
+お願い:
+- 原因を教えてください
+- 修正するファイル名を明記してください
+- 変更部分だけを分かりやすく示してください</code></pre>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>「全部直して」よりも<br>「何が起きているか」を伝える方が強いです</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>お題1: 自己紹介ページの例</h2>
+        <h3>プロンプト</h3>
+        <pre><code>HTMLで自己紹介ページを作ってください。
+名前、趣味、好きな食べ物を載せてください</code></pre>
+        <h3>こんなコードが出てきます</h3>
+        <pre><code>&lt;h1&gt;自己紹介&lt;/h1&gt;
+&lt;p&gt;名前: ○○ ○○&lt;/p&gt;
+&lt;p&gt;趣味: △△&lt;/p&gt;
+&lt;p&gt;好きな食べ物: □□&lt;/p&gt;</code></pre>
+        <h3>確認ポイント</h3>
+        <ul>
+          <li>ブラウザに名前・趣味・好きな食べ物が表示されればOK</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>お題2: 日付表示の例</h2>
+        <h3>プロンプト</h3>
+        <pre><code>JavaScriptで今日の日付を表示する
+プログラムを作ってください</code></pre>
+        <h3>こんなコードが出てきます</h3>
+        <pre><code>&lt;script&gt;
+  var today = new Date();
+  document.write(today.toLocaleDateString('ja-JP'));
+&lt;/script&gt;</code></pre>
+        <h3>確認ポイント</h3>
+        <ul>
+          <li>ブラウザに今日の日付（例: 2026/4/13）が表示されればOK</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>お題3: 虹色グラデーションの例</h2>
+        <h3>プロンプト</h3>
+        <pre><code>CSSで虹色のグラデーション背景を
+作ってください</code></pre>
+        <h3>こんなコードが出てきます</h3>
+        <pre><code>body {
+  background: linear-gradient(
+    to right, red, orange, yellow,
+    green, blue, indigo, violet
+  );
+  height: 100vh;
+}</code></pre>
+        <h3>確認ポイント</h3>
+        <ul>
+          <li>ブラウザの背景が虹色のグラデーションになればOK</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>ワークのまとめ</h2>
+        <div class="highlight-box">
+          <p>AIに指示を出す → コードが生成される →<br>ブラウザで確認する</p>
+        </div>
+        <ul>
+          <li>同じ指示でも<strong>毎回少し違うコード</strong>が出てくる</li>
+          <li>うまくいかない時は<strong>エラーをAIに見せて</strong>修正依頼</li>
+          <li>この流れを使って、午後後半で<strong>ゲーム</strong>を作ります!</li>
+        </ul>
+        <div class="info-card">
+          <p><strong>ポイント:</strong> AIは「一発で完璧に作る道具」ではなく、<strong>作って → 試して → 直す</strong>相棒です。</p>
+          <p><strong>講師補足:</strong> ここで「保存」「ブラウザ確認」「再依頼」の3手順をもう一度口頭で確認すると、午後のハンズオンが安定します。</p>
+        </div>
+      </section>
+
+      <!-- プロンプト埋め込み: 4.5末尾 業務系プロンプト -->
+      <section class="prompt-card">
+        <h2>業務系Javaもいける</h2>
+        <p>日本語で要件を書くだけで、Spring Boot の業務ロジックが一気に生成されます。</p>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-java">コピー</button>
+<pre id="p-java">あなたはSpring Bootの実務経験豊富なエンジニアです。
+以下の要件でJavaコードを書いてください。
+
+【要件】
+- Customerエンティティ（id: Long, name: String, phone: String, lastUpdatedAt: LocalDateTime）
+- CustomerRepository（JpaRepository&lt;Customer, Long&gt;）
+- CustomerServiceに findCustomerInfo(Long id) を実装
+- 見つからない場合は CustomerNotFoundException をthrow
+- 戻り値は CustomerInfoDto（name, phone, lastUpdatedAt）
+
+【前提】
+- Lombok使用、Null安全、Optional使用、例外クラスも作成</pre>
+        </div>
+        <p class="prompt-tip">コツ：社内のコーディング規約を一緒に渡すと精度が跳ねます。生成結果は必ず目視レビューを。</p>
+      </section>
+
+      <section class="prompt-card">
+        <h2>詳細設計書 → テストコード</h2>
+        <p>設計書（Word / Excel / PDF）を渡せば、JUnit5 + Mockito のテストが自動生成できます。</p>
+        <div class="prompt-cols">
+          <div>
+            <h4>サンプル設計書</h4>
+            <div class="prompt-wrap">
+              <button class="copy-btn" data-target="p-spec">コピー</button>
+<pre id="p-spec"># 詳細設計書：ログイン機能
+
+## 入力
+- userId: 半角英数 4〜20文字（必須）
+- password: 半角英数記号 8〜32文字（必須）
+
+## 処理
+1. 入力ルール検証
+2. DBで userId 存在確認
+3. BCryptハッシュ照合
+4. 成功なら JWT 発行
+5. 失敗カウンタ+1、5回でロック
+
+## 出力
+- 200: 成功＋JWT
+- 400: 形式不正
+- 401: 認証失敗
+- 423: ロック中</pre>
+            </div>
+          </div>
+          <div>
+            <h4>テスト生成プロンプト</h4>
+            <div class="prompt-wrap">
+              <button class="copy-btn" data-target="p-testgen">コピー</button>
+<pre id="p-testgen">上記の詳細設計書に基づき、
+以下の観点を網羅する JUnit5 + Mockito の
+テストコードを書いてください。
+
+- 正常系：3ケース
+- バリデーションエラー：5ケース（境界値含む）
+- 認証失敗：1ケース
+- ロック状態：1ケース
+- 5回失敗でロック：1ケース
+
+対象：LoginService.login(String userId, String password)
+@Nested で観点別に整理、日本語テスト名で。</pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="prompt-card">
+        <h2>GitLab連携</h2>
+        <p>GitLab Duo がなくても、diff を渡すだけで CI 設定や MR レビューコメントが出せます。</p>
+        <div class="prompt-cols">
+          <div>
+            <h4>.gitlab-ci.yml 生成</h4>
+            <div class="prompt-wrap">
+              <button class="copy-btn" data-target="p-gitlabci">コピー</button>
+<pre id="p-gitlabci">Spring Boot 3.x + Maven + Java 21 のプロジェクトで使う
+.gitlab-ci.yml を書いてください。
+
+- build / test / package / deploy の4ステージ
+- test では JUnit レポートを artifact として保存
+- main ブランチへのマージ時のみ deploy
+- Docker image build も含む
+
+GitLab Runner の Docker executor 前提で。</pre>
+            </div>
+          </div>
+          <div>
+            <h4>MR（マージリクエスト）レビュー</h4>
+            <div class="prompt-wrap">
+              <button class="copy-btn" data-target="p-mrreview">コピー</button>
+<pre id="p-mrreview">以下の git diff をレビューしてください。
+
+- 意図の要約（3行以内）
+- 潜在的なバグ・副作用
+- テスト観点の追加提案
+- コーディング規約の観点
+
+【diff】
+(ここに git diff を貼る)</pre>
+            </div>
+          </div>
+        </div>
+        <p class="prompt-tip">GitHub と手順はほぼ同じ。<code>git remote add origin</code> の URL が GitLab のものに変わるだけです。</p>
+      </section>
+
+      <!-- ============================================================
+           セクション 6: 特化型AIツール体験
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F3A8;</div>
+        <div class="section-number">6</div>
+        <h2>こんなこともできる!<br>特化したAI</h2>
+        <p>14:30 - 15:00（30分）</p>
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=140&fit=crop" alt="Creative media production" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
+      </section>
+
+      <section>
+        <h2>Sora ― 動画生成AI</h2>
+        <h3>テキストから動画を自動生成</h3>
+        <ul>
+          <li>OpenAIが提供する<strong>動画生成AI</strong></li>
+          <li>テキストプロンプトから高品質な動画を生成</li>
+          <li>映画級のクオリティも実現可能</li>
+          <li>商用利用時はライセンス確認が必要</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Nano Banana ― 画像生成AI</h2>
+        <h3>ブラウザで手軽に画像を生成</h3>
+        <ul>
+          <li><strong>ブラウザだけ</strong>で簡単に画像生成</li>
+          <li>スタイル指定や構図指定が可能</li>
+          <li>プロンプトの書き方で結果が大きく変わる</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>実際にプロンプトを入れて<br>画像を生成してみましょう</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Suno AI ― 音楽生成AI</h2>
+        <h3>ジャンル・歌詞・ムードを指定して作曲</h3>
+        <ul>
+          <li>テキストの指示だけで<strong>楽曲を生成</strong></li>
+          <li>ジャンル、ムード、テンポなどを指定可能</li>
+          <li>BGM作成やプロトタイプに活用できる</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>AI生成物と著作権</h2>
+        <ul>
+          <li>AI生成物の<strong>著作権</strong>は法的に議論が進行中</li>
+          <li>商用利用は各サービスの<strong>利用規約</strong>を確認</li>
+          <li>既存の著作物に酷似した出力には注意</li>
+          <li>社内利用でも<strong>会社のポリシー</strong>を事前に確認</li>
+        </ul>
+        <blockquote>
+          便利なツールだからこそ、ルールを理解して使いましょう
+        </blockquote>
+      </section>
+
+      <!-- プロンプト埋め込み: 4.6末尾 翻訳・図生成 -->
+      <section class="prompt-card">
+        <h2>業務翻訳 ― 用語を固定する</h2>
+        <p>DeepL で下訳 → LLM で用語統一と文体整形。用語集を渡すだけで品質が跳ねます。</p>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-translate">コピー</button>
+<pre id="p-translate">以下の英語技術文書を日本語に翻訳してください。
+
+【用語集】
+- authentication → 認証
+- authorization → 認可
+- token → トークン（カタカナ固定）
+- endpoint → エンドポイント（カタカナ固定）
+- middleware → ミドルウェア
+
+【翻訳方針】
+- 敬体（です・ます調）
+- コードブロック内は翻訳しない
+- 用語集は厳守
+
+【原文】
+(ここに英文を貼る)</pre>
+        </div>
+        <p class="prompt-tip">議事録・社内マニュアル・技術文書で、月数十時間の削減事例あり。</p>
+      </section>
+
+      <section class="prompt-card">
+        <h2>図の自動生成 ― Mermaid / drawio</h2>
+        <p>文章指示から即、シーケンス図・ER図・クラス図が作れます。議事録直後に図化するのに便利。</p>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-mermaid">コピー</button>
+<pre id="p-mermaid">以下の業務フローを Mermaid のシーケンス図で書いてください。
+
+【登場人物】
+- 顧客
+- Webフロント
+- バックエンドAPI
+- 認証基盤
+- データベース
+
+【流れ】
+1. 顧客が画面でログインボタンを押す
+2. Webフロントがバックエンドにログイン要求
+3. バックエンドが認証基盤にトークン検証を依頼
+4. 認証基盤がDBをチェック
+5. 成功なら JWT を発行して顧客へ返す
+
+出力は mermaid コードブロックだけで。</pre>
+        </div>
+        <p class="prompt-tip">「drawio の XML 形式で出して」と指示すれば drawio にそのまま貼り付けて編集可能です。</p>
+      </section>
+
+      <!-- ============================================================
+           休憩: 15:00 - 15:10
+           ============================================================ -->
+      <section class="break-slide">
+        <div class="slide-icon">&#x2615;</div>
+        <h2>休憩</h2>
+        <p>15:00 - 15:10（10分）</p>
+        <p style="margin-top: 1.2em;">次はいよいよ<br><strong>バイブコーディング</strong>でゲームを作ります!</p>
+      </section>
+
+      <!-- ============================================================
+           セクション 7: 鬼ごっこ大作戦 前半（Step 1 - 5）
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F3AE;</div>
+        <div class="section-number">7</div>
+        <h2>鬼ごっこ大作戦<br>前半</h2>
+        <p>15:10 - 16:00（50分）</p>
+        <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=500&h=140&fit=crop" alt="Programming and gaming" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
+      </section>
+
+      <!-- 追加スライド: 4.7冒頭 詰まった時の対処＆質問のしかた -->
+      <section class="prompt-card">
+        <h2>詰まった時の対処＆質問のしかた</h2>
+        <p>このスライドをブックマークしておくと、ハンズオン中に詰まっても1分で立て直せます。</p>
+        <div class="prompt-cols">
+          <div>
+            <h4>よくある詰まりと対処</h4>
+            <table class="help-table">
+              <thead><tr><th>症状</th><th>対処</th></tr></thead>
+              <tbody>
+                <tr><td>回答が途中で切れる</td><td>「続けて」と送る</td></tr>
+                <tr><td>コードが動かない</td><td>エラー文をそのままAIに貼る</td></tr>
+                <tr><td>AIが断る</td><td>目的・前提・制約を分けて書き直す</td></tr>
+                <tr><td>期待と違う出力</td><td>入出力のサンプルを1つ添える</td></tr>
+                <tr><td>同じミスを繰り返す</td><td>新しいチャットで再スタート</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h4>講師・周囲に聞く時のテンプレ</h4>
+            <div class="prompt-wrap">
+              <button class="copy-btn" data-target="p-asktpl">コピー</button>
+<pre id="p-asktpl">【やりたいこと】
+例：ログインのテストを生成したい
+
+【やったこと】
+例：設計書を貼って「テスト書いて」と指示
+
+【出た結果／エラー】
+例：1件しか出ない、境界値なし
+
+【自分なりに考えた原因】
+例：件数指定がなかった？
+
+【使用ツール・環境】
+例：Claude Web、Java 21、JUnit5</pre>
+            </div>
+            <p class="prompt-tip">エラーや実際の入出力はそのまま貼ってください。「動かない」だけだと助けられません。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>ハンズオンの進め方</h2>
+        <ol>
+          <li>講師が各ステップの<strong>やること</strong>を説明</li>
+          <li>手順書のプロンプトを<strong>AIに送信</strong></li>
+          <li>AIが生成したコードを<strong>ファイルに反映</strong></li>
+          <li><strong>Live Server</strong>でブラウザ確認</li>
+          <li>確認ポイントをクリアしたら<strong>次のステップ</strong>へ</li>
+        </ol>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>困ったらエラーメッセージを<br>そのままAIに貼り付けて相談!</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>ファイル構成</h2>
+        <h3>3つのファイルに分けて作ります</h3>
+        <table>
+          <thead>
+            <tr><th>ファイル</th><th>役割</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>index.html</code></td><td>ゲームの構造（HTML）</td></tr>
+            <tr><td><code>style.css</code></td><td>見た目（CSS）</td></tr>
+            <tr><td><code>game.js</code></td><td>動きの処理（JavaScript）</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>保存 → 実行 → 修正 の流れ</h2>
+        <ol>
+          <li><strong>AIに依頼する</strong><br><span style="font-size: 0.82em; color: #555555;">まずはプロンプトをそのまま貼る</span></li>
+          <li><strong>ファイルに反映する</strong><br><span style="font-size: 0.82em; color: #555555;">どのファイルを直すか必ず確認する</span></li>
+          <li><strong>Live Serverで動作確認する</strong><br><span style="font-size: 0.82em; color: #555555;">見た目と動きをセットで見る</span></li>
+          <li><strong>症状をそのまま再依頼する</strong><br><span style="font-size: 0.82em; color: #555555;">「期待」と「実際の動き」を両方伝える</span></li>
+        </ol>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>「保存していない」だけで動かないことも多いです<br>まず保存、次にブラウザ確認!</p>
+        </div>
+      </section>
+
+      <!-- ===== Step 1 ===== -->
+      <section>
+        <div class="step-badge">STEP 1</div>
+        <h2>ゲームのフィールドを表示する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>ブラウザゲームを作りたいです。
+以下の3つのファイルに分けて作ってください。
+- index.html（ゲームの構造）
+- style.css（見た目のデザイン）
+- game.js（動きの処理、今は空でOK）
+
+まずはゲームのフィールド（800×600ピクセル）を
+画面の中央に表示してください。
+- ページ全体の背景色は暗い青（#1a1a2e）
+- フィールドの色は紺色（#16213e）
+- フィールドの枠線は赤（#e94560）で太さ3px</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 1</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>暗い青の背景が表示されている</li>
+          <li>画面の中央に紺色の四角形が表示されている</li>
+          <li>四角形の周りに赤い枠線がある</li>
+        </ul>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>画面が真っ白</td><td>「style.cssが正しく読み込まれているか<br>確認してください」</td></tr>
+            <tr><td>左上に寄っている</td><td>「bodyにdisplay:flexと<br>justify-content:centerを<br>設定してください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>うまくいかない方はこちら（参考プロンプト）</summary>
+          <div class="toggle-body">
+            <p>以下をAIに送ってみてください：</p>
+            <pre>画面の中央に800x600pxの紺色(#16213e)のdivを表示するHTMLを作ってください。
+ページ背景は暗い青(#1a1a2e)、枠線は赤(#e94560)3px。
+ファイルはindex.html, style.css, game.js(空)の3つに分けてください。
+bodyにはdisplay:flex, justify-content:center, align-items:center, height:100vhを設定してください。</pre>
+          </div>
+        </details>
+        <details>
+          <summary>想定コードはこちら</summary>
+          <div class="toggle-body">
+            <p><strong>index.html</strong></p>
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;鬼ごっこ大作戦&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="field"&gt;&lt;/div&gt;
+  &lt;script src="game.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            <p><strong>style.css</strong></p>
+<pre>* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #1a1a2e;
+  display: flex; justify-content: center;
+  align-items: center; height: 100vh;
+}
+#field {
+  width: 800px; height: 600px;
+  background: #16213e;
+  border: 3px solid #e94560;
+  position: relative;
+}</pre>
+            <p><strong>game.js</strong>（空でOK）</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 2 ===== -->
+      <section>
+        <div class="step-badge">STEP 2</div>
+        <h2>プレイヤーを表示する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>フィールドの中央に、プレイヤーとして
+緑色の丸を表示してください。
+- div要素で作り、id="player" をつける
+- 大きさは28x28ピクセル
+- CSSのborder-radiusで丸くする
+- 色は緑色（#0fff50）
+- CSSのpositionをabsoluteにして、
+  フィールド内で自由に動かせるようにする</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 2</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>フィールドの真ん中に<strong>緑色の丸</strong>が表示されている</li>
+        </ul>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>丸ではなく四角</td><td>「border-radius: 50%が設定されているか<br>確認してください」</td></tr>
+            <tr><td>フィールドの外にいる</td><td>「positionがabsoluteになっていて、<br>#fieldがrelativeになっているか<br>確認してください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら</summary>
+          <div class="toggle-body">
+            <p><strong>index.html に追加</strong></p>
+<pre>&lt;div id="field"&gt;
+  &lt;div id="player"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+            <p><strong>style.css に追加</strong></p>
+<pre>#player {
+  width: 28px; height: 28px;
+  background: #0fff50;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 3 ===== -->
+      <section>
+        <div class="step-badge">STEP 3</div>
+        <h2>プレイヤーをマウスで動かす</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>プレイヤーをマウスで動かせるようにしてください。
+- マウスカーソルの位置を記録する（mousemoveイベント）
+- 毎フレーム、プレイヤーがマウスの方向に向かって移動する
+- 移動スピードは 3.5
+- フィールドの外には出ないように制限する
+- requestAnimationFrameを使って毎フレーム更新する
+
+動き方のイメージ：
+マウスを動かすとプレイヤーが
+ゆっくり追いかけてくる感じです。</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 3</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>マウスを動かすと<strong>緑の丸が追いかけてくる</strong></li>
+          <li>フィールドの端でプレイヤーが<strong>止まる</strong>（はみ出さない）</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>ここで初めて「動き」が出ます!<br>うまく動いたら拍手!</p>
+        </div>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>動かない</td><td>「mousemoveイベントとgameLoop関数が<br>正しく設定されているか確認してください」</td></tr>
+            <tr><td>ワープする</td><td>「現在地からマウスの方向に少しずつ<br>移動するようにしてください。<br>スピードは3.5です」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js）</summary>
+          <div class="toggle-body">
+<pre>const field = document.getElementById('field');
+const player = document.getElementById('player');
+const SPEED = 3.5;
+let mouseX = 400, mouseY = 300;
+let px = 400, py = 300;
+
+field.addEventListener('mousemove', e => {
+  const rect = field.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+});
+
+function gameLoop() {
+  const dx = mouseX - px;
+  const dy = mouseY - py;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > SPEED) {
+    px += (dx / dist) * SPEED;
+    py += (dy / dist) * SPEED;
+  }
+  // フィールド内に制限
+  px = Math.max(14, Math.min(786, px));
+  py = Math.max(14, Math.min(586, py));
+  player.style.left = (px - 14) + 'px';
+  player.style.top = (py - 14) + 'px';
+  requestAnimationFrame(gameLoop);
+}
+gameLoop();</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 4 ===== -->
+      <section>
+        <div class="step-badge">STEP 4</div>
+        <h2>鬼を追加する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>鬼（敵キャラ）を追加してください。
+- 赤い丸（直径32px、色は #e94560）
+- div要素で作り、id="oni" をつける
+- 最初はフィールドの左上あたり（x:100, y:100）に配置
+- 毎フレーム、プレイヤーの方向にまっすぐ追いかけてくる
+- 鬼のスピードは 2.0（プレイヤーより遅い）</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 4</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>左上あたりに<strong>赤い丸（鬼）</strong>が表示されている</li>
+          <li>鬼がプレイヤーを<strong>ゆっくり追いかけてくる</strong></li>
+          <li>プレイヤーの方が速いので<strong>逃げることができる</strong></li>
+        </ul>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>鬼が表示されない</td><td>「id="oni"のdivと#oniの<br>CSSスタイルがあるか<br>確認してください」</td></tr>
+            <tr><td>鬼が動かない</td><td>「update関数の中で鬼が<br>プレイヤーの方向に移動する<br>処理を入れてください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js に追加）</summary>
+          <div class="toggle-body">
+<pre>const oni = document.getElementById('oni');
+const ONI_SPEED = 2.0;
+let ox = 100, oy = 100;
+
+// gameLoop 内に追加：
+function updateOni() {
+  const dx = px - ox;
+  const dy = py - oy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > ONI_SPEED) {
+    ox += (dx / dist) * ONI_SPEED;
+    oy += (dy / dist) * ONI_SPEED;
+  }
+  oni.style.left = (ox - 16) + 'px';
+  oni.style.top = (oy - 16) + 'px';
+}</pre>
+            <p><strong>index.html の #field 内に追加</strong></p>
+<pre>&lt;div id="oni"&gt;&lt;/div&gt;</pre>
+            <p><strong>style.css に追加</strong></p>
+<pre>#oni {
+  width: 32px; height: 32px;
+  background: #e94560;
+  border-radius: 50%;
+  position: absolute;
+}</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 5 ===== -->
+      <section>
+        <div class="step-badge">STEP 5</div>
+        <h2>当たり判定を追加する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>プレイヤーと鬼がぶつかったら
+ゲームオーバーにしてください。
+- 2つの丸の中心同士の距離を計算して、
+  半径の合計より近かったら
+  「ぶつかった」と判定する
+- ゲームオーバーになったら：
+  - ゲームの動きを止める
+  - 画面を暗くして「GAME OVER」と赤い文字で表示
+  - 「リトライ」ボタンを表示して、
+    押したら最初からやり直せるようにする</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 5</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>鬼に触れると<strong>「GAME OVER」</strong>が表示される</li>
+          <li>画面が<strong>暗く</strong>なる</li>
+          <li>「リトライ」ボタンで<strong>やり直せる</strong></li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>前半の基本部分が完成!<br>ゲームとして遊べる状態になりました</p>
+        </div>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>ぶつかっても何も起きない</td><td>「isHit関数が正しく動いているか<br>確認してください」</td></tr>
+            <tr><td>GAME OVERが最初から見える</td><td>「gameover-screenのstyleに<br>display:noneを設定してください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js に追加）</summary>
+          <div class="toggle-body">
+<pre>function isHit(x1, y1, r1, x2, y2, r2) {
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  return Math.sqrt(dx*dx + dy*dy) &lt; r1 + r2;
+}
+
+// gameLoop 内に追加：
+if (isHit(px, py, 14, ox, oy, 16)) {
+  // ゲームオーバー
+  cancelAnimationFrame(animId);
+  document.getElementById('gameover-screen')
+    .style.display = 'flex';
+}</pre>
+            <p><strong>index.html に追加（#field の後ろ）</strong></p>
+<pre>&lt;div id="gameover-screen" style="display:none;"&gt;
+  &lt;h1&gt;GAME OVER&lt;/h1&gt;
+  &lt;button onclick="retry()"&gt;リトライ&lt;/button&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ============================================================
+           休憩: 16:00 - 16:10
+           ============================================================ -->
+      <section class="break-slide">
+        <div class="slide-icon">&#x2615;</div>
+        <h2>休憩</h2>
+        <p>16:00 - 16:10（10分）</p>
+        <p style="margin-top: 1.2em;">ここまでで<strong>基本のゲーム</strong>が完成!<br>後半ではさらに機能を追加します</p>
+      </section>
+
+      <!-- ============================================================
+           セクション 8: 鬼ごっこ大作戦 後半＆発展（Step 6 - 8 + 番外編）
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F680;</div>
+        <div class="section-number">8</div>
+        <h2>鬼ごっこ大作戦<br>後半 &amp; 番外編</h2>
+        <p>16:10 - 16:50（40分）</p>
+      </section>
+
+      <!-- ===== Step 6 ===== -->
+      <section>
+        <div class="step-badge">STEP 6</div>
+        <h2>制限時間を追加する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>30秒の制限時間を追加してください。
+- フィールドの上部に残り時間を表示するエリア（HUD）を作る
+  - 高さ40px、半透明の黒背景
+  - 左側に「残り ○○秒」と表示
+- 1秒ごとにカウントダウンする（setIntervalを使う）
+- 0秒になったらゲームクリア！
+  「CLEAR!」と緑色の文字で表示する
+- 「もう一度」ボタンで最初からやり直せるようにする
+- ゲームオーバーかクリアになったら
+  カウントダウンも止める</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 6</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>上部に<strong>「残り 30秒」</strong>と表示されている</li>
+          <li>1秒ごとに<strong>カウントダウン</strong>する</li>
+          <li>30秒逃げ切ると<strong>「CLEAR!」</strong>と緑色で表示される</li>
+          <li>鬼に捕まるとカウントダウンも止まる</li>
+        </ul>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>カウントダウンが始まらない</td><td>「setIntervalで1秒ごとに<br>timeLeftを減らす処理を<br>入れてください」</td></tr>
+            <tr><td>リトライ後に時間が速い</td><td>「古いタイマーをclearIntervalで<br>止めてから新しいsetIntervalを<br>始めてください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js に追加）</summary>
+          <div class="toggle-body">
+<pre>let timeLeft = 30;
+let timerId = null;
+
+function startTimer() {
+  timeLeft = 30;
+  updateHUD();
+  timerId = setInterval(() => {
+    timeLeft--;
+    updateHUD();
+    if (timeLeft &lt;= 0) {
+      clearInterval(timerId);
+      // クリア表示
+      document.getElementById('clear-screen')
+        .style.display = 'flex';
+      cancelAnimationFrame(animId);
+    }
+  }, 1000);
+}
+
+function updateHUD() {
+  document.getElementById('hud-time')
+    .textContent = '残り ' + timeLeft + '秒';
+}</pre>
+            <p><strong>index.html の #field 内上部に追加</strong></p>
+<pre>&lt;div id="hud"&gt;
+  &lt;span id="hud-time"&gt;残り 30秒&lt;/span&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 7 ===== -->
+      <section>
+        <div class="step-badge">STEP 7</div>
+        <h2>アイテムを追加する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>フィールドにアイテムを追加してください。
+- 黄色い丸（直径20px、色は #f1c40f）
+- ゲーム開始時にランダムな位置に3個配置する
+- プレイヤーが触れたら消えて、スコアが+100点増える
+- スコアをHUDの右側に「スコア: 0」と表示する
+- 3秒ごとに新しいアイテムが1個追加される（最大8個まで）
+- アイテムはdiv要素をJavaScriptで動的に作成する</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 7</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li><strong>黄色い丸</strong>が3個、ランダムな位置に表示されている</li>
+          <li>触れると消えて<strong>スコアが100増える</strong></li>
+          <li>3秒ごとに新しい丸が<strong>追加される</strong>（最大8個）</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>「逃げるだけ」から<br>「逃げながら集める」に進化!</p>
+        </div>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>アイテムが表示されない</td><td>「addItem関数でdivを作り<br>field.appendChildで<br>フィールドに追加してください」</td></tr>
+            <tr><td>触れても消えない</td><td>「update関数でプレイヤーと<br>各アイテムの当たり判定を<br>チェックしてください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js に追加）</summary>
+          <div class="toggle-body">
+<pre>let items = [];
+let score = 0;
+
+function addItem() {
+  if (items.length &gt;= 8) return;
+  const el = document.createElement('div');
+  el.className = 'item';
+  const x = Math.random() * 760 + 20;
+  const y = Math.random() * 560 + 20;
+  el.style.left = (x - 10) + 'px';
+  el.style.top = (y - 10) + 'px';
+  field.appendChild(el);
+  items.push({ el, x, y });
+}
+
+// 初期配置
+for (let i = 0; i &lt; 3; i++) addItem();
+// 3秒ごとに追加
+setInterval(addItem, 3000);
+
+// gameLoop 内に追加：
+function checkItems() {
+  items = items.filter(item => {
+    if (isHit(px, py, 14, item.x, item.y, 10)) {
+      item.el.remove();
+      score += 100;
+      document.getElementById('hud-score')
+        .textContent = 'スコア: ' + score;
+      return false;
+    }
+    return true;
+  });
+}</pre>
+            <p><strong>style.css に追加</strong></p>
+<pre>.item {
+  width: 20px; height: 20px;
+  background: #f1c40f;
+  border-radius: 50%;
+  position: absolute;
+}</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- ===== Step 8 ===== -->
+      <section>
+        <div class="step-badge">STEP 8</div>
+        <h2>タイトル画面を追加する</h2>
+        <h3>AIへの指示（プロンプト）</h3>
+        <pre><code>ゲームの最初にタイトル画面を表示してください。
+- ゲーム名「鬼ごっこ大作戦」を大きく表示する
+- 「鬼から逃げてアイテムを集めろ！」という説明文
+- 「スタート」ボタンを押すとゲームが始まる
+- ゲームオーバーやクリアの画面にも
+  スコアを表示する
+- ページを開いた時点では
+  ゲームは始まらず、タイトル画面だけ表示する</code></pre>
+      </section>
+
+      <section>
+        <div class="step-badge">STEP 8</div>
+        <h2>確認ポイント</h2>
+        <ul>
+          <li>ページを開くと<strong>タイトル画面</strong>が表示される</li>
+          <li>「スタート」ボタンで<strong>ゲームが始まる</strong></li>
+          <li>ゲームオーバー・クリア画面に<strong>スコア</strong>が表示される</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>ゲームの基本形が完成!<br>ここまで来た自分に拍手!</p>
+        </div>
+        <h3>うまくいかない時</h3>
+        <table>
+          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
+          <tbody>
+            <tr><td>タイトルが出ない</td><td>「title-screenのdisplayを<br>flexにして、他のoverlayは<br>display:noneにしてください」</td></tr>
+            <tr><td>すぐゲームが始まる</td><td>「stateの初期値を"title"にして、<br>update関数の最初で"playing"以外なら<br>何もしないようにしてください」</td></tr>
+          </tbody>
+        </table>
+        <details>
+          <summary>想定コードはこちら（game.js に追加）</summary>
+          <div class="toggle-body">
+<pre>let state = 'title'; // 'title' | 'playing' | 'over' | 'clear'
+
+function startGame() {
+  state = 'playing';
+  document.getElementById('title-screen')
+    .style.display = 'none';
+  resetGame();
+  startTimer();
+  gameLoop();
+}
+
+// gameLoop の冒頭に追加：
+if (state !== 'playing') return;</pre>
+            <p><strong>index.html に追加（#field の前）</strong></p>
+<pre>&lt;div id="title-screen"&gt;
+  &lt;h1&gt;鬼ごっこ大作戦&lt;/h1&gt;
+  &lt;p&gt;鬼から逃げてアイテムを集めろ！&lt;/p&gt;
+  &lt;button onclick="startGame()"&gt;スタート&lt;/button&gt;
+&lt;/div&gt;</pre>
+          </div>
+        </details>
+      </section>
+
+      <!-- 番外編 -->
+      <section>
+        <h2>番外編: 自由カスタマイズ</h2>
+        <p>自分のアイデアでゲームを進化させよう!</p>
+        <table class="customize-table">
+          <thead>
+            <tr><th>カスタマイズ</th><th>難易度</th><th>概要</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>見た目を画像に変更</td><td>低</td><td>プレイヤーと鬼を画像に差し替え</td></tr>
+            <tr><td>新しい種類の鬼を追加</td><td>中</td><td>巡回型の紫の鬼を追加</td></tr>
+            <tr><td>スピードアップアイテム</td><td>中</td><td>取ると5秒間速くなる水色アイテム</td></tr>
+            <tr><td>効果音を追加</td><td>中</td><td>コイン音、失敗音、ファンファーレ</td></tr>
+            <tr><td>難易度の動的変化</td><td>中</td><td>時間経過で鬼のスピードアップ</td></tr>
+            <tr><td>ステージ制</td><td>高</td><td>複数ステージで難易度上昇</td></tr>
+            <tr><td>障害物（壁）を配置</td><td>高</td><td>フィールド内に壁を追加</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>カスタマイズのコツ</h2>
+        <ul>
+          <li>手順書にない<strong>自分の言葉</strong>でAIに指示してみよう</li>
+          <li>うまくいかなくても<strong>エラーをAIに見せて修正</strong>依頼</li>
+          <li>「こうしたい」→「AIに指示」→「動く!」<br>のサイクルを体験することが目的</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>面白いカスタマイズができたら<br>最後にみんなに見せましょう!</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           セクション: 振り返り＆クロージング
+           ============================================================ -->
+      <section class="section-title">
+        <div class="slide-icon">&#x1F3C1;</div>
+        <h2>振り返り &amp;<br>クロージング</h2>
+        <p>16:50 - 17:00（10分）</p>
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=140&fit=crop" alt="Achievement and celebration" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
+      </section>
+
+      <!-- 追加スライド: 活用度チェック票（主催者向け） -->
+      <section class="prompt-card">
+        <h2>活用度チェック票（主催者向け）</h2>
+        <p>受講後の効果測定に。3軸×3段階で定着を可視化します。</p>
+        <table class="help-table">
+          <thead>
+            <tr><th>軸</th><th>0：未達</th><th>1：部分達成</th><th>2：達成</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>定着度</strong></td>
+              <td>業務で使っていない</td>
+              <td>週1回未満</td>
+              <td>週3回以上</td>
+            </tr>
+            <tr>
+              <td><strong>再現度</strong></td>
+              <td>資料を見ても再現不可</td>
+              <td>資料を見れば再現可</td>
+              <td>資料なしで再現可</td>
+            </tr>
+            <tr>
+              <td><strong>横展開</strong></td>
+              <td>自分も使えていない</td>
+              <td>自分は使えるが指導は困難</td>
+              <td>他部署へ展開可能</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="prompt-tip">実施タイミング：受講後 1週間 / 1ヶ月 / 3ヶ月 の3回。1人あたり合計0〜6点。</p>
+      </section>
+
+      <section>
+        <h2>今日の学び 3つのポイント</h2>
+        <ol>
+          <li><strong>AIは万能ではないが、強力なツール</strong><br>
+            <span style="font-size: 0.82em; color: #555555;">ハルシネーションに注意しつつ、うまく使えば生産性が大幅に向上</span></li>
+          <li><strong>プロンプト（指示の出し方）が鍵</strong><br>
+            <span style="font-size: 0.82em; color: #555555;">具体的で明確な指示を出すことで、AIの出力品質が格段に上がる</span></li>
+          <li><strong>まず触ってみることが大事</strong><br>
+            <span style="font-size: 0.82em; color: #555555;">今日触ったツールを明日から使ってみよう。使うほどコツが掴める</span></li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>明日からの活用</h2>
+        <table>
+          <thead>
+            <tr><th>ツール</th><th>活用シーン</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ChatGPT / Claude / Gemini</strong></td><td>文章作成、リサーチ、アイデア出し</td></tr>
+            <tr><td><strong>NotebookLM</strong></td><td>資料の要約、ソースに基づく質問</td></tr>
+            <tr><td><strong>Gemini Code Assist</strong></td><td>プログラミング支援、コード生成</td></tr>
+            <tr><td><strong>Sora / Nano Banana / Suno AI</strong></td><td>動画・画像・音楽の生成</td></tr>
+          </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>「今日学んだことをどう活かすか?」<br>ぜひ考えてみてください</p>
+        </div>
+      </section>
+
+      <section style="text-align: center;">
+        <div class="slide-icon">&#x1F4DD;</div>
+        <h2 style="border-bottom: none; font-size: 1.8em;">アンケートのお願い</h2>
+        <p style="font-size: 1em; margin-top: 0.8em;">本日の感想をぜひお聞かせください</p>
+        <div class="highlight-box" style="margin-top: 1.2em;">
+          <p style="font-size: 1.1em;">アンケートURL / QRコード</p>
+          <p style="font-size: 0.75em; color: #555555; font-weight: normal;">（ここにQRコードまたはURLを配置）</p>
+        </div>
+        <p style="margin-top: 1.5em; font-size: 1.3em; font-weight: 700; color: #1a1a1a;">
+          本日はありがとうございました!
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script>
+    /* ===== コピーボタン（既存の pre code ブロック用） ===== */
+    function copyTextWithFallback(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+
+      return new Promise(function(resolve, reject) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          if (successful) {
+            resolve();
+          } else {
+            reject(new Error('copy failed'));
+          }
+        } catch (error) {
+          document.body.removeChild(textarea);
+          reject(error);
+        }
+      });
+    }
+
+    function enhanceCopyBlocks() {
+      document.querySelectorAll('.reveal pre').forEach(function(pre) {
+        if (pre.dataset.copyEnhanced === 'true') {
+          return;
+        }
+
+        // prompt-wrap 内の pre はスキップ（copy-btn で処理する）
+        if (pre.closest('.prompt-wrap')) {
+          return;
+        }
+        // toggle-body 内の pre もスキップ
+        if (pre.closest('.toggle-body')) {
+          return;
+        }
+
+        var code = pre.querySelector('code');
+        if (!code) {
+          return;
+        }
+
+        pre.dataset.copyEnhanced = 'true';
+        pre.classList.add('copy-ready');
+
+        var heading = pre.previousElementSibling ? pre.previousElementSibling.textContent : '';
+        var sectionHeadingElement = pre.closest('section') ? pre.closest('section').querySelector('h2') : null;
+        var sectionHeading = sectionHeadingElement ? sectionHeadingElement.textContent : '';
+        if (/プロンプト|AIへの指示/.test(heading) || /テンプレ|再依頼/.test(sectionHeading)) {
+          pre.classList.add('prompt-block');
+          code.textContent = code.textContent
+            .replace(/\r\n?/g, '\n')
+            .replace(/\n{2,}/g, '\n')
+            .trim();
+        } else {
+          pre.classList.add('code-block');
+          if (/こんなコードが出てきます/.test(heading)) {
+            pre.classList.add('code-example-block');
+          }
+        }
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'copy-button';
+        button.textContent = 'コピー';
+
+        button.addEventListener('click', function() {
+          var text = code.textContent.replace(/\n+$/, '');
+          copyTextWithFallback(text).then(function() {
+            button.textContent = 'コピー済み';
+            button.classList.add('is-copied');
+            window.setTimeout(function() {
+              button.textContent = 'コピー';
+              button.classList.remove('is-copied');
+            }, 1600);
+          }).catch(function() {
+            button.textContent = '失敗';
+            window.setTimeout(function() {
+              button.textContent = 'コピー';
+            }, 1600);
+          });
+        });
+
+        pre.appendChild(button);
+      });
+    }
+
+    enhanceCopyBlocks();
+
+    Reveal.initialize({
+      hash: true,
+      slideNumber: 'c/t',
+      keyboard: true,
+      progress: true,
+      width: 1280,
+      height: 720,
+      margin: 0.07,
+      transition: 'fade',
+      transitionSpeed: 'default',
+      center: true,
+    });
+
+    Reveal.on('ready', function() {
+      enhanceCopyBlocks();
+    });
+    Reveal.on('slidechanged', function() {
+      enhanceCopyBlocks();
+    });
+
+    /* ===== プロンプトカードのコピーボタン（.copy-btn 用） ===== */
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var targetId = btn.getAttribute('data-target');
+        var el = document.getElementById(targetId);
+        if (!el) return;
+        var text = el.innerText;
+        copyTextWithFallback(text).then(function() {
+          var original = btn.textContent;
+          btn.textContent = 'コピー済';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1500);
+        }).catch(function() {
+          // フォールバック：選択＋execCommand
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand('copy'); } catch (err) {}
+          sel.removeAllRanges();
+          btn.textContent = 'コピー済';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'コピー';
+            btn.classList.remove('copied');
+          }, 1500);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
