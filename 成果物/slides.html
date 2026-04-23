@@ -1706,14 +1706,17 @@
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>フィールドの中央に、プレイヤーとして
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+フィールドの中央に、プレイヤーとして
 緑色の丸を表示してください。
 - div要素で作り、id="player" をつける
 - 大きさは28x28ピクセル
 - CSSのborder-radiusで丸くする
 - 色は緑色（#0fff50）
-- CSSのpositionをabsoluteにして、
-  フィールド内で自由に動かせるようにする</pre>
+- positionはabsoluteにする
+- 中央配置は top: 286px, left: 386px の
+  座標で指定する（transformは使わない）</pre>
           </div>
         </details>
         <details>
@@ -1760,7 +1763,9 @@
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>プレイヤーをマウスで動かせるようにしてください。
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+プレイヤーをマウスで動かせるようにしてください。
 - マウスカーソルの位置を記録する（mousemoveイベント）
 - 毎フレーム、プレイヤーがマウスの方向に向かって移動する
 - 移動スピードは 3.5
@@ -1844,7 +1849,9 @@ gameLoop();</pre>
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>鬼（敵キャラ）を追加してください。
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+鬼（敵キャラ）を追加してください。
 - 赤い丸（直径32px、色は #e94560）
 - div要素で作り、id="oni" をつける
 - 最初はフィールドの左上あたり（x:100, y:100）に配置
@@ -1915,7 +1922,9 @@ oniEl.style.top = (oniY - oniR) + 'px';</pre>
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>プレイヤーと鬼がぶつかったら
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+プレイヤーと鬼がぶつかったら
 ゲームオーバーにしてください。
 - 2つの丸の中心同士の距離を計算して、
   半径の合計より近かったら
@@ -2037,7 +2046,9 @@ function startGame() {
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>30秒の制限時間を追加してください。
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+30秒の制限時間を追加してください。
 - フィールドの上部に残り時間を表示するエリア（HUD）を作る
   - 高さ40px、半透明の黒背景
   - 左側に「残り ○○秒」と表示
@@ -2144,7 +2155,9 @@ startGame();</pre>
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>フィールドにアイテムを追加してください。
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+フィールドにアイテムを追加してください。
 - 黄色い丸（直径20px、色は #f1c40f）
 - ゲーム開始時にランダムな位置に3個配置する
 - プレイヤーが触れたら消えて、スコアが+100点増える
@@ -2241,12 +2254,12 @@ if (timeLeft % 3 === 0 &amp;&amp; items.length &lt; 8) addItem();</pre>
         <details>
           <summary>困った時のプロンプトはこちら</summary>
           <div class="toggle-body">
-<pre>ゲームの最初にタイトル画面を表示してください。
+<pre>※ 既存の index.html / style.css / game.js を残したまま、以下の機能を追加してください。
+
+ゲームの最初にタイトル画面を表示してください。
 - ゲーム名「鬼ごっこ大作戦」を大きく表示する
 - 「鬼から逃げてアイテムを集めろ！」という説明文
 - 「スタート」ボタンを押すとゲームが始まる
-- ゲームオーバーやクリアの画面にも
-  スコアを表示する
 - ページを開いた時点では
   ゲームは始まらず、タイトル画面だけ表示する</pre>
           </div>
