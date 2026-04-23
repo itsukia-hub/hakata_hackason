@@ -1403,37 +1403,83 @@
         </div>
       </section>
 
-      <!-- Git の概要（GitLab説明の前置き、社長指示 2026-04-18） -->
+      <!-- Git の概念図 -->
       <section>
-        <h2>Git ― バージョン管理システム</h2>
-        <h3>AIとの相性が抜群に良いツール</h3>
-        <ul>
-          <li>&#x1F4DC; <strong>履歴管理</strong> ― いつ・誰が・どこを変更したかを追跡</li>
-          <li>&#x1F33F; <strong>ブランチ</strong> ― 変更を分岐させ、並行して試行錯誤できる</li>
-          <li>&#x1F504; <strong>巻き戻し</strong> ― どの時点にも瞬時に戻せる</li>
-          <li>&#x1F465; <strong>共同開発</strong> ― チームで同じコードベースを安全に共有</li>
-        </ul>
-        <div class="highlight-box" style="margin-top: 0.5em;">
-          <p>AIが生成したコードを一旦コミット → 壊れたらすぐ戻せる。<br>
-            <code>git diff</code>でAIの「やりすぎ」をチェックできる ― <strong>AI時代の必須スキル</strong></p>
+        <h2>Git</h2>
+
+        <!-- 概念図: Working → Staging → Repository の流れ -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 0.4em; margin: 1em 0 0.8em;">
+          <div style="border: 2px solid #1a1a1a; border-radius: 10px; padding: 0.7em 1em; background: #fff; text-align: center; min-width: 5.5em;">
+            <div style="font-size: 1.8em;">&#x1F4DD;</div>
+            <div style="font-size: 0.6em; font-weight: 700;">作業ファイル</div>
+          </div>
+          <div style="font-size: 0.7em; color: #e94560; font-weight: 700;">━ add ▶</div>
+          <div style="border: 2px solid #1a1a1a; border-radius: 10px; padding: 0.7em 1em; background: #fff; text-align: center; min-width: 5.5em;">
+            <div style="font-size: 1.8em;">&#x1F4E6;</div>
+            <div style="font-size: 0.6em; font-weight: 700;">ステージ</div>
+          </div>
+          <div style="font-size: 0.7em; color: #e94560; font-weight: 700;">━ commit ▶</div>
+          <div style="border: 2px solid #1a1a1a; border-radius: 10px; padding: 0.7em 1em; background: #fff; text-align: center; min-width: 5.5em;">
+            <div style="font-size: 1.8em;">&#x1F4BE;</div>
+            <div style="font-size: 0.6em; font-weight: 700;">リポジトリ</div>
+          </div>
+        </div>
+
+        <!-- 概念図: ブランチ -->
+        <div style="margin: 1em auto 0; max-width: min(62%, 680px); font-size: 0.85em; background: #f7f7f7; border: 1px dashed #ccc; border-radius: 8px; padding: 0.8em 1em;">
+          <div style="display: flex; align-items: center; gap: 0.8em; margin-bottom: 0.4em;">
+            <span style="min-width: 4.5em; font-weight: 700; color: #16213e;">&#x1F33F; main</span>
+            <span style="letter-spacing: 0.3em; color: #16213e; font-size: 1.1em;">●─●─●───────●─</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.8em;">
+            <span style="min-width: 4.5em; font-weight: 700; color: #0b8f5d;">&#x1F33F; feature</span>
+            <span style="letter-spacing: 0.3em; color: #0b8f5d; font-size: 1.1em;">&nbsp;&nbsp;&nbsp;&nbsp;└●─●─●┘</span>
+          </div>
         </div>
       </section>
 
-      <!-- GitLabの概要と主な機能 -->
+      <!-- GitLab vs GitHub -->
       <section>
-        <h2>GitLab ― 開発の統合プラットフォーム</h2>
-        <h3>Gitリポジトリを中心に、開発〜運用までを1つに</h3>
-        <ul>
-          <li>&#x1F4C1; <strong>Gitリポジトリ管理</strong> ― ソースコードのバージョン管理（GitHubと同等）</li>
-          <li>&#x1F501; <strong>CI/CD（GitLab CI）</strong> ― ビルド・テスト・デプロイを自動化</li>
-          <li>&#x1F4DD; <strong>Issue管理</strong> ― タスク・バグ・要望の追跡とマイルストーン管理</li>
-          <li>&#x1F50D; <strong>Merge Request</strong> ― コードレビュー、承認フロー、自動テスト連携</li>
-          <li>&#x1F6E1; <strong>セキュリティスキャン</strong> ― 依存ライブラリの脆弱性チェック・SAST/DAST</li>
-          <li>&#x2728; <strong>GitLab Duo（AI機能）</strong> ― コード補完、MRレビュー自動提案、チャット</li>
-          <li>&#x1F3E0; <strong>セルフホスト可</strong> ― 社内サーバーで運用すればソース非公開でも使える</li>
-        </ul>
+        <h2>GitLab と GitHub の違い</h2>
+        <table style="font-size: 0.72em;">
+          <thead>
+            <tr><th>観点</th><th>&#x1F31F; GitHub</th><th>&#x1F98A; GitLab</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>位置づけ</strong></td>
+              <td>OSS共有の世界標準</td>
+              <td>開発〜運用を統合</td>
+            </tr>
+            <tr>
+              <td><strong>CI/CD</strong></td>
+              <td>GitHub Actions（別機能として連携）</td>
+              <td>GitLab CI（標準搭載）</td>
+            </tr>
+            <tr>
+              <td><strong>セキュリティスキャン</strong></td>
+              <td>Dependabot等の個別機能</td>
+              <td>SAST/DAST 標準搭載</td>
+            </tr>
+            <tr>
+              <td><strong>AI機能</strong></td>
+              <td>GitHub Copilot（有償）</td>
+              <td>GitLab Duo</td>
+            </tr>
+            <tr>
+              <td><strong>セルフホスト</strong></td>
+              <td>Enterprise 版（有償）</td>
+              <td>Community 版 無料</td>
+            </tr>
+            <tr>
+              <td><strong>主な採用先</strong></td>
+              <td>OSS・スタートアップ・個人開発</td>
+              <td>金融・官公庁・大企業</td>
+            </tr>
+          </tbody>
+        </table>
         <div class="highlight-box" style="margin-top: 0.5em;">
-          <p>GitHubの代替として、金融・官公庁・大企業で広く採用されています</p>
+          <p>GitLabは「1つで完結」、GitHubは「連携で拡張」の思想</p>
         </div>
       </section>
 
