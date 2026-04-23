@@ -693,8 +693,8 @@
             <tr><td>11:50 - 12:45</td><td>代表的な生成AIに触れてみる</td><td>講義 + ハンズオン</td></tr>
             <tr><td>12:45 - 13:00</td><td>AIを使う上でのポイント</td><td>講義</td></tr>
             <tr><td>13:00 - 14:00</td><td style="color:#888;">昼休み</td><td>-</td></tr>
-            <tr><td>14:00 - 14:30</td><td>AIエージェントの活用</td><td>講義 + ハンズオン</td></tr>
-            <tr><td>14:30 - 15:00</td><td>特化型AIツール体験</td><td>講義 + デモ</td></tr>
+            <tr><td>14:00 - 14:45</td><td>AIエージェントの活用 + 業務プロンプト例</td><td>講義 + ハンズオン</td></tr>
+            <tr><td>14:45 - 15:00</td><td>特化型AIツール体験</td><td>講義 + デモ</td></tr>
             <tr><td>15:00 - 15:10</td><td style="color:#888;">休憩</td><td>-</td></tr>
             <tr><td>15:10 - 16:00</td><td>実装！鬼ごっこ大作戦（前半）</td><td>ハンズオン</td></tr>
             <tr><td>16:00 - 16:10</td><td style="color:#888;">休憩</td><td>-</td></tr>
@@ -1215,8 +1215,8 @@
       <section class="section-title">
         <div class="slide-icon">&#x1F9BE;</div>
         <div class="section-number">5</div>
-        <h2>AIエージェントの活用</h2>
-        <p>14:00 - 14:30（30分）</p>
+        <h2>AIエージェントの活用<br><span style="font-size: 0.55em;">＋ 業務プロンプト例</span></h2>
+        <p>14:00 - 14:45（45分）</p>
       </section>
 
       <!-- 講師用：冒頭おさらい約1分 -->
@@ -1276,7 +1276,7 @@
               <li><strong>コード補完</strong> ― 入力中に候補を提示</li>
               <li><strong>チャット</strong> ― コードについて質問</li>
               <li><strong>エージェントモード</strong> ― 自律的にコードを生成・編集<br>
-                <span style="font-size: 0.8em; color: #555;">※本ワークショップではトークン節約のため使用しません（説明のみ）</span></li>
+                <span style="font-size: 0.8em; color: #555;">※本ワークショップでは「エージェントスイッチ」はONにせず使います（トークン節約のため）</span></li>
             </ul>
           </li>
         </ul>
@@ -1301,10 +1301,9 @@
         <div class="work-card">
           <div class="label">お題 1</div>
           <p style="font-size: 0.85em;">「自己紹介ページを作ってください。内容は以下でお願いします。<br>
-            名前：阿部樹<br>
-            趣味：読書<br>
-            ○○：○○…<br>
-            （あなたが好きな項目を自由に入れてください 例: 名前、趣味、好きな食べ物、最近ハマっていることなど）<br>
+            <span style="color:#888;">（例）名前：阿部樹 / 趣味：読書 / ○○：○○</span><br>
+            ※ご自身の好きな項目に差し替えてください<br>
+            （例: 名前、趣味、好きな食べ物、最近ハマっていることなど）<br>
             お願いします。」</p>
         </div>
         <div class="work-card">
@@ -1350,7 +1349,6 @@
         </div>
       </section>
 
-      <!-- お題1〜3の例スライドは削除済み（社長指示 2026-04-18） -->
 
       <section>
         <h2>ワークのまとめ</h2>
@@ -1439,6 +1437,67 @@
         </div>
       </section>
 
+      <!-- 業務翻訳: §6から§5末尾に移動（業務プロンプト例として整理） -->
+      <section class="prompt-card">
+        <h2>業務翻訳 ― 公式ドキュメントを読む</h2>
+        <h3>英語の公式ドキュメントを、用語を固定して日本語化</h3>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-translate">コピー</button>
+<pre id="p-translate">以下のReact公式ドキュメントを日本語に翻訳してください。
+
+【用語集】
+- component → コンポーネント（カタカナ固定）
+- hook → フック（カタカナ固定）
+- state → state（英語のまま）
+- props → props（英語のまま）
+- render → レンダリング
+- prop drilling → プロップドリリング
+
+【翻訳方針】
+- 敬体（です・ます調）
+- コードブロック内は翻訳しない
+- 用語集は厳守
+- 公式ドキュメント特有の言い回しは自然な日本語に
+
+【原文】
+(ここに公式ドキュメントの英文を貼る)</pre>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>英語の公式ドキュメントが読みこなせると、最新の情報に一次ソースでアクセスできます</p>
+        </div>
+      </section>
+
+      <!-- 図の自動生成: §6から§5末尾に移動 -->
+      <section class="prompt-card">
+        <h2>図の自動生成 ― Mermaid / drawio</h2>
+        <h3>文章指示からシーケンス図・ER図・クラス図が作れる</h3>
+        <div class="prompt-wrap">
+          <button class="copy-btn" data-target="p-mermaid">コピー</button>
+<pre id="p-mermaid">以下の業務フローを Mermaid のシーケンス図で書いてください。
+
+【登場人物】
+- 顧客
+- Webフロント
+- バックエンドAPI
+- 認証基盤
+- データベース
+
+【流れ】
+1. 顧客が画面でログインボタンを押す
+2. Webフロントがバックエンドにログイン要求
+3. バックエンドが認証基盤にトークン検証を依頼
+4. 認証基盤がDBをチェック
+5. 成功なら JWT を発行して顧客へ返す
+
+出力は mermaid コードブロックだけで。
+新規ファイルを作成して上記を記載するようにしてください。</pre>
+        </div>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>確認するには VSCode拡張機能「<strong>Markdown Preview Mermaid Support</strong>」が必要です</p>
+          <p>「drawioのXML形式で出して」と指示すれば、drawioにそのまま貼り付けて編集可能</p>
+        </div>
+      </section>
+
       <!-- ============================================================
            セクション 6: 特化型AIツール体験
            ============================================================ -->
@@ -1446,7 +1505,7 @@
         <div class="slide-icon">&#x1F3A8;</div>
         <div class="section-number">6</div>
         <h2>こんなこともできる!<br>特化したAI</h2>
-        <p>14:30 - 15:00（30分）</p>
+        <p>14:45 - 15:00（15分）</p>
         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=500&h=140&fit=crop" alt="Creative media production" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
       </section>
 
@@ -1494,67 +1553,6 @@
         </ul>
         <div class="highlight-box" style="margin-top: 0.7em;">
           <p>便利なツールだからこそ、ルールを理解して使いましょう</p>
-        </div>
-      </section>
-
-      <!-- 業務翻訳: 公式ドキュメント翻訳の例 -->
-      <section class="prompt-card">
-        <h2>業務翻訳 ― 公式ドキュメントを読む</h2>
-        <h3>英語の公式ドキュメントを、用語を固定して日本語化</h3>
-        <div class="prompt-wrap">
-          <button class="copy-btn" data-target="p-translate">コピー</button>
-<pre id="p-translate">以下のReact公式ドキュメントを日本語に翻訳してください。
-
-【用語集】
-- component → コンポーネント（カタカナ固定）
-- hook → フック（カタカナ固定）
-- state → state（英語のまま）
-- props → props（英語のまま）
-- render → レンダリング
-- prop drilling → プロップドリリング
-
-【翻訳方針】
-- 敬体（です・ます調）
-- コードブロック内は翻訳しない
-- 用語集は厳守
-- 公式ドキュメント特有の言い回しは自然な日本語に
-
-【原文】
-(ここに公式ドキュメントの英文を貼る)</pre>
-        </div>
-        <div class="highlight-box" style="margin-top: 0.5em;">
-          <p>英語の公式ドキュメントが読みこなせると、最新の情報に一次ソースでアクセスできます</p>
-        </div>
-      </section>
-
-      <!-- 図の自動生成: 前半レイアウトと統一 -->
-      <section class="prompt-card">
-        <h2>図の自動生成 ― Mermaid / drawio</h2>
-        <h3>文章指示からシーケンス図・ER図・クラス図が作れる</h3>
-        <div class="prompt-wrap">
-          <button class="copy-btn" data-target="p-mermaid">コピー</button>
-<pre id="p-mermaid">以下の業務フローを Mermaid のシーケンス図で書いてください。
-
-【登場人物】
-- 顧客
-- Webフロント
-- バックエンドAPI
-- 認証基盤
-- データベース
-
-【流れ】
-1. 顧客が画面でログインボタンを押す
-2. Webフロントがバックエンドにログイン要求
-3. バックエンドが認証基盤にトークン検証を依頼
-4. 認証基盤がDBをチェック
-5. 成功なら JWT を発行して顧客へ返す
-
-出力は mermaid コードブロックだけで。
-新規ファイルを作成して上記を記載するようにしてください。</pre>
-        </div>
-        <div class="highlight-box" style="margin-top: 0.5em;">
-          <p>確認するには VSCode拡張機能「<strong>Markdown Preview Mermaid Support</strong>」が必要です</p>
-          <p>「drawioのXML形式で出して」と指示すれば、drawioにそのまま貼り付けて編集可能</p>
         </div>
       </section>
 
@@ -2290,7 +2288,7 @@ var state = 'title'; // 'title' / 'playing' / 'gameover' / 'clear'
 titleScreen.style.display = 'none';
 
 // ファイル末尾の startGame(); の呼び出しを削除
-// （ボタン押下時のみ開始）</pre>
+// （STEP6で追加した自動起動を外し、スタートボタン押下でのみ開始するように変える）</pre>
           </div>
         </details>
       </section>
@@ -2328,10 +2326,11 @@ titleScreen.style.display = 'none';
       </section>
 
       <!-- ============================================================
-           セクション: 振り返り＆クロージング
+           セクション 9: 振り返り＆クロージング
            ============================================================ -->
       <section class="section-title">
         <div class="slide-icon">&#x1F3C1;</div>
+        <div class="section-number">9</div>
         <h2>振り返り &amp;<br>クロージング</h2>
         <p>16:50 - 17:00（10分）</p>
         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=140&fit=crop" alt="Achievement and celebration" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
