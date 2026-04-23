@@ -605,10 +605,11 @@
       padding: 0.4em 0.6em;
     }
 
-    /* --- トグル（正解行動・想定コード折りたたみ） --- */
+    /* --- トグル（困った時のプロンプト・想定コード折りたたみ） --- */
     .reveal details {
-      margin: 0.35em 0 0;
+      margin: 0.35em auto 0;
       text-align: left;
+      max-width: min(78%, 880px);
     }
     .reveal details summary {
       cursor: pointer;
@@ -1582,59 +1583,18 @@
         <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=500&h=140&fit=crop" alt="Programming and gaming" class="slide-photo" style="width: 38%; max-height: 120px; margin-top: 0.3em;">
       </section>
 
-      <!-- 追加スライド: 4.7冒頭 詰まった時の対処＆質問のしかた -->
-      <section class="prompt-card">
-        <h2>詰まった時の対処＆質問のしかた</h2>
-        <p>このスライドをブックマークしておくと、ハンズオン中に詰まっても1分で立て直せます。</p>
-        <div class="prompt-cols">
-          <div>
-            <h4>よくある詰まりと対処</h4>
-            <table class="help-table">
-              <thead><tr><th>症状</th><th>対処</th></tr></thead>
-              <tbody>
-                <tr><td>回答が途中で切れる</td><td>「続けて」と送る</td></tr>
-                <tr><td>コードが動かない</td><td>エラー文をそのままAIに貼る</td></tr>
-                <tr><td>AIが断る</td><td>目的・前提・制約を分けて書き直す</td></tr>
-                <tr><td>期待と違う出力</td><td>入出力のサンプルを1つ添える</td></tr>
-                <tr><td>同じミスを繰り返す</td><td>新しいチャットで再スタート</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <h4>講師・周囲に聞く時のテンプレ</h4>
-            <div class="prompt-wrap">
-              <button class="copy-btn" data-target="p-asktpl">コピー</button>
-<pre id="p-asktpl">【やりたいこと】
-例：ログインのテストを生成したい
-
-【やったこと】
-例：設計書を貼って「テスト書いて」と指示
-
-【出た結果／エラー】
-例：1件しか出ない、境界値なし
-
-【自分なりに考えた原因】
-例：件数指定がなかった？
-
-【使用ツール・環境】
-例：Claude Web、Java 21、JUnit5</pre>
-            </div>
-            <p class="prompt-tip">エラーや実際の入出力はそのまま貼ってください。「動かない」だけだと助けられません。</p>
-          </div>
-        </div>
-      </section>
-
+      <!-- ハンズオンの進め方：画面の見た目から自分で実装する流れに変更 -->
       <section>
         <h2>ハンズオンの進め方</h2>
         <ol>
-          <li>講師が各ステップの<strong>やること</strong>を説明</li>
-          <li>手順書のプロンプトを<strong>AIに送信</strong></li>
+          <li>画面の<strong>見た目と確認ポイント</strong>を確認する</li>
+          <li>求められる動作を実現するために<strong>自分でプロンプトを考えてAIに送る</strong></li>
           <li>AIが生成したコードを<strong>ファイルに反映</strong></li>
-          <li><strong>Live Server</strong>でブラウザ確認</li>
-          <li>確認ポイントをクリアしたら<strong>次のステップ</strong>へ</li>
+          <li><strong>index.htmlをブラウザで開いて</strong>動作確認</li>
+          <li>詰まったら「<strong>困った時のプロンプト</strong>」のプルダウンを参考に</li>
         </ol>
         <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>困ったらエラーメッセージを<br>そのままAIに貼り付けて相談!</p>
+          <p>プロンプトに正解はありません。自分の言葉で試行錯誤することが一番の学び</p>
         </div>
       </section>
 
@@ -1653,25 +1613,20 @@
         </table>
       </section>
 
-      <section>
-        <h2>保存 → 実行 → 修正 の流れ</h2>
-        <ol>
-          <li><strong>AIに依頼する</strong><br><span style="font-size: 0.82em; color: #555555;">まずはプロンプトをそのまま貼る</span></li>
-          <li><strong>ファイルに反映する</strong><br><span style="font-size: 0.82em; color: #555555;">どのファイルを直すか必ず確認する</span></li>
-          <li><strong>Live Serverで動作確認する</strong><br><span style="font-size: 0.82em; color: #555555;">見た目と動きをセットで見る</span></li>
-          <li><strong>症状をそのまま再依頼する</strong><br><span style="font-size: 0.82em; color: #555555;">「期待」と「実際の動き」を両方伝える</span></li>
-        </ol>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>「保存していない」だけで動かないことも多いです<br>まず保存、次にブラウザ確認!</p>
-        </div>
-      </section>
-
       <!-- ===== Step 1 ===== -->
       <section>
         <div class="step-badge">STEP 1</div>
         <h2>ゲームのフィールドを表示する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>ブラウザゲームを作りたいです。
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>暗い青の背景が表示されている</li>
+          <li>画面の中央に紺色の四角形が表示されている</li>
+          <li>四角形の周りに赤い枠線がある</li>
+        </ul>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>ブラウザゲームを作りたいです。
 以下の3つのファイルに分けて作ってください。
 - index.html（ゲームの構造）
 - style.css（見た目のデザイン）
@@ -1681,33 +1636,7 @@
 画面の中央に表示してください。
 - ページ全体の背景色は暗い青（#1a1a2e）
 - フィールドの色は紺色（#16213e）
-- フィールドの枠線は赤（#e94560）で太さ3px</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 1</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>暗い青の背景が表示されている</li>
-          <li>画面の中央に紺色の四角形が表示されている</li>
-          <li>四角形の周りに赤い枠線がある</li>
-        </ul>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>画面が真っ白</td><td>「style.cssが正しく読み込まれているか<br>確認してください」</td></tr>
-            <tr><td>左上に寄っている</td><td>「bodyにdisplay:flexと<br>justify-content:centerを<br>設定してください」</td></tr>
-          </tbody>
-        </table>
-        <details>
-          <summary>うまくいかない方はこちら（参考プロンプト）</summary>
-          <div class="toggle-body">
-            <p>以下をAIに送ってみてください：</p>
-            <pre>画面の中央に800x600pxの紺色(#16213e)のdivを表示するHTMLを作ってください。
-ページ背景は暗い青(#1a1a2e)、枠線は赤(#e94560)3px。
-ファイルはindex.html, style.css, game.js(空)の3つに分けてください。
-bodyにはdisplay:flex, justify-content:center, align-items:center, height:100vhを設定してください。</pre>
+- フィールドの枠線は赤（#e94560）で太さ3px</pre>
           </div>
         </details>
         <details>
@@ -1748,31 +1677,23 @@ body {
       <section>
         <div class="step-badge">STEP 2</div>
         <h2>プレイヤーを表示する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>フィールドの中央に、プレイヤーとして
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>フィールドの真ん中に<strong>緑色の丸</strong>が表示されている</li>
+        </ul>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>フィールドの中央に、プレイヤーとして
 緑色の丸を表示してください。
 - div要素で作り、id="player" をつける
 - 大きさは28x28ピクセル
 - CSSのborder-radiusで丸くする
 - 色は緑色（#0fff50）
 - CSSのpositionをabsoluteにして、
-  フィールド内で自由に動かせるようにする</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 2</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>フィールドの真ん中に<strong>緑色の丸</strong>が表示されている</li>
-        </ul>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>丸ではなく四角</td><td>「border-radius: 50%が設定されているか<br>確認してください」</td></tr>
-            <tr><td>フィールドの外にいる</td><td>「positionがabsoluteになっていて、<br>#fieldがrelativeになっているか<br>確認してください」</td></tr>
-          </tbody>
-        </table>
+  フィールド内で自由に動かせるようにする</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら</summary>
           <div class="toggle-body">
@@ -1797,8 +1718,18 @@ body {
       <section>
         <div class="step-badge">STEP 3</div>
         <h2>プレイヤーをマウスで動かす</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>プレイヤーをマウスで動かせるようにしてください。
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>マウスを動かすと<strong>緑の丸が追いかけてくる</strong></li>
+          <li>フィールドの端でプレイヤーが<strong>止まる</strong>（はみ出さない）</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>ここで初めて「動き」が出ます!</p>
+        </div>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>プレイヤーをマウスで動かせるようにしてください。
 - マウスカーソルの位置を記録する（mousemoveイベント）
 - 毎フレーム、プレイヤーがマウスの方向に向かって移動する
 - 移動スピードは 3.5
@@ -1807,27 +1738,9 @@ body {
 
 動き方のイメージ：
 マウスを動かすとプレイヤーが
-ゆっくり追いかけてくる感じです。</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 3</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>マウスを動かすと<strong>緑の丸が追いかけてくる</strong></li>
-          <li>フィールドの端でプレイヤーが<strong>止まる</strong>（はみ出さない）</li>
-        </ul>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>ここで初めて「動き」が出ます!<br>うまく動いたら拍手!</p>
-        </div>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>動かない</td><td>「mousemoveイベントとgameLoop関数が<br>正しく設定されているか確認してください」</td></tr>
-            <tr><td>ワープする</td><td>「現在地からマウスの方向に少しずつ<br>移動するようにしてください。<br>スピードは3.5です」</td></tr>
-          </tbody>
-        </table>
+ゆっくり追いかけてくる感じです。</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js）</summary>
           <div class="toggle-body">
@@ -1867,31 +1780,23 @@ gameLoop();</pre>
       <section>
         <div class="step-badge">STEP 4</div>
         <h2>鬼を追加する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>鬼（敵キャラ）を追加してください。
-- 赤い丸（直径32px、色は #e94560）
-- div要素で作り、id="oni" をつける
-- 最初はフィールドの左上あたり（x:100, y:100）に配置
-- 毎フレーム、プレイヤーの方向にまっすぐ追いかけてくる
-- 鬼のスピードは 2.0（プレイヤーより遅い）</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 4</div>
-        <h2>確認ポイント</h2>
+        <h3>画面の見た目・確認ポイント</h3>
         <ul>
           <li>左上あたりに<strong>赤い丸（鬼）</strong>が表示されている</li>
           <li>鬼がプレイヤーを<strong>ゆっくり追いかけてくる</strong></li>
           <li>プレイヤーの方が速いので<strong>逃げることができる</strong></li>
         </ul>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>鬼が表示されない</td><td>「id="oni"のdivと#oniの<br>CSSスタイルがあるか<br>確認してください」</td></tr>
-            <tr><td>鬼が動かない</td><td>「update関数の中で鬼が<br>プレイヤーの方向に移動する<br>処理を入れてください」</td></tr>
-          </tbody>
-        </table>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>鬼（敵キャラ）を追加してください。
+- 赤い丸（直径32px、色は #e94560）
+- div要素で作り、id="oni" をつける
+- 最初はフィールドの左上あたり（x:100, y:100）に配置
+- 毎フレーム、プレイヤーの方向にまっすぐ追いかけてくる
+- 鬼のスピードは 2.0（プレイヤーより遅い）</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js に追加）</summary>
           <div class="toggle-body">
@@ -1928,8 +1833,19 @@ function updateOni() {
       <section>
         <div class="step-badge">STEP 5</div>
         <h2>当たり判定を追加する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>プレイヤーと鬼がぶつかったら
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>鬼に触れると<strong>「GAME OVER」</strong>が表示される</li>
+          <li>画面が<strong>暗く</strong>なる</li>
+          <li>「リトライ」ボタンで<strong>やり直せる</strong></li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>前半の基本部分が完成！遊べる状態になりました</p>
+        </div>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>プレイヤーと鬼がぶつかったら
 ゲームオーバーにしてください。
 - 2つの丸の中心同士の距離を計算して、
   半径の合計より近かったら
@@ -1938,28 +1854,9 @@ function updateOni() {
   - ゲームの動きを止める
   - 画面を暗くして「GAME OVER」と赤い文字で表示
   - 「リトライ」ボタンを表示して、
-    押したら最初からやり直せるようにする</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 5</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>鬼に触れると<strong>「GAME OVER」</strong>が表示される</li>
-          <li>画面が<strong>暗く</strong>なる</li>
-          <li>「リトライ」ボタンで<strong>やり直せる</strong></li>
-        </ul>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>前半の基本部分が完成!<br>ゲームとして遊べる状態になりました</p>
-        </div>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>ぶつかっても何も起きない</td><td>「isHit関数が正しく動いているか<br>確認してください」</td></tr>
-            <tr><td>GAME OVERが最初から見える</td><td>「gameover-screenのstyleに<br>display:noneを設定してください」</td></tr>
-          </tbody>
-        </table>
+    押したら最初からやり直せるようにする</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js に追加）</summary>
           <div class="toggle-body">
@@ -2009,8 +1906,17 @@ if (isHit(px, py, 14, ox, oy, 16)) {
       <section>
         <div class="step-badge">STEP 6</div>
         <h2>制限時間を追加する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>30秒の制限時間を追加してください。
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>上部に<strong>「残り 30秒」</strong>と表示されている</li>
+          <li>1秒ごとに<strong>カウントダウン</strong>する</li>
+          <li>30秒逃げ切ると<strong>「CLEAR!」</strong>と緑色で表示される</li>
+          <li>鬼に捕まるとカウントダウンも止まる</li>
+        </ul>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>30秒の制限時間を追加してください。
 - フィールドの上部に残り時間を表示するエリア（HUD）を作る
   - 高さ40px、半透明の黒背景
   - 左側に「残り ○○秒」と表示
@@ -2019,26 +1925,9 @@ if (isHit(px, py, 14, ox, oy, 16)) {
   「CLEAR!」と緑色の文字で表示する
 - 「もう一度」ボタンで最初からやり直せるようにする
 - ゲームオーバーかクリアになったら
-  カウントダウンも止める</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 6</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>上部に<strong>「残り 30秒」</strong>と表示されている</li>
-          <li>1秒ごとに<strong>カウントダウン</strong>する</li>
-          <li>30秒逃げ切ると<strong>「CLEAR!」</strong>と緑色で表示される</li>
-          <li>鬼に捕まるとカウントダウンも止まる</li>
-        </ul>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>カウントダウンが始まらない</td><td>「setIntervalで1秒ごとに<br>timeLeftを減らす処理を<br>入れてください」</td></tr>
-            <tr><td>リトライ後に時間が速い</td><td>「古いタイマーをclearIntervalで<br>止めてから新しいsetIntervalを<br>始めてください」</td></tr>
-          </tbody>
-        </table>
+  カウントダウンも止める</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js に追加）</summary>
           <div class="toggle-body">
@@ -2077,35 +1966,27 @@ function updateHUD() {
       <section>
         <div class="step-badge">STEP 7</div>
         <h2>アイテムを追加する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>フィールドにアイテムを追加してください。
-- 黄色い丸（直径20px、色は #f1c40f）
-- ゲーム開始時にランダムな位置に3個配置する
-- プレイヤーが触れたら消えて、スコアが+100点増える
-- スコアをHUDの右側に「スコア: 0」と表示する
-- 3秒ごとに新しいアイテムが1個追加される（最大8個まで）
-- アイテムはdiv要素をJavaScriptで動的に作成する</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 7</div>
-        <h2>確認ポイント</h2>
+        <h3>画面の見た目・確認ポイント</h3>
         <ul>
           <li><strong>黄色い丸</strong>が3個、ランダムな位置に表示されている</li>
           <li>触れると消えて<strong>スコアが100増える</strong></li>
           <li>3秒ごとに新しい丸が<strong>追加される</strong>（最大8個）</li>
         </ul>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>「逃げるだけ」から<br>「逃げながら集める」に進化!</p>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>「逃げるだけ」から「逃げながら集める」に進化！</p>
         </div>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>アイテムが表示されない</td><td>「addItem関数でdivを作り<br>field.appendChildで<br>フィールドに追加してください」</td></tr>
-            <tr><td>触れても消えない</td><td>「update関数でプレイヤーと<br>各アイテムの当たり判定を<br>チェックしてください」</td></tr>
-          </tbody>
-        </table>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>フィールドにアイテムを追加してください。
+- 黄色い丸（直径20px、色は #f1c40f）
+- ゲーム開始時にランダムな位置に3個配置する
+- プレイヤーが触れたら消えて、スコアが+100点増える
+- スコアをHUDの右側に「スコア: 0」と表示する
+- 3秒ごとに新しいアイテムが1個追加される（最大8個まで）
+- アイテムはdiv要素をJavaScriptで動的に作成する</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js に追加）</summary>
           <div class="toggle-body">
@@ -2157,36 +2038,28 @@ function checkItems() {
       <section>
         <div class="step-badge">STEP 8</div>
         <h2>タイトル画面を追加する</h2>
-        <h3>AIへの指示（プロンプト）</h3>
-        <pre><code>ゲームの最初にタイトル画面を表示してください。
+        <h3>画面の見た目・確認ポイント</h3>
+        <ul>
+          <li>ページを開くと<strong>タイトル画面</strong>が表示される</li>
+          <li>「スタート」ボタンで<strong>ゲームが始まる</strong></li>
+          <li>ゲームオーバー・クリア画面に<strong>スコア</strong>が表示される</li>
+        </ul>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>ゲームの基本形が完成！ここまで来た自分に拍手！</p>
+        </div>
+        <details>
+          <summary>困った時のプロンプトはこちら</summary>
+          <div class="toggle-body">
+<pre>ゲームの最初にタイトル画面を表示してください。
 - ゲーム名「鬼ごっこ大作戦」を大きく表示する
 - 「鬼から逃げてアイテムを集めろ！」という説明文
 - 「スタート」ボタンを押すとゲームが始まる
 - ゲームオーバーやクリアの画面にも
   スコアを表示する
 - ページを開いた時点では
-  ゲームは始まらず、タイトル画面だけ表示する</code></pre>
-      </section>
-
-      <section>
-        <div class="step-badge">STEP 8</div>
-        <h2>確認ポイント</h2>
-        <ul>
-          <li>ページを開くと<strong>タイトル画面</strong>が表示される</li>
-          <li>「スタート」ボタンで<strong>ゲームが始まる</strong></li>
-          <li>ゲームオーバー・クリア画面に<strong>スコア</strong>が表示される</li>
-        </ul>
-        <div class="highlight-box" style="margin-top: 0.7em;">
-          <p>ゲームの基本形が完成!<br>ここまで来た自分に拍手!</p>
-        </div>
-        <h3>うまくいかない時</h3>
-        <table>
-          <thead><tr><th>症状</th><th>AIに送るメッセージ</th></tr></thead>
-          <tbody>
-            <tr><td>タイトルが出ない</td><td>「title-screenのdisplayを<br>flexにして、他のoverlayは<br>display:noneにしてください」</td></tr>
-            <tr><td>すぐゲームが始まる</td><td>「stateの初期値を"title"にして、<br>update関数の最初で"playing"以外なら<br>何もしないようにしてください」</td></tr>
-          </tbody>
-        </table>
+  ゲームは始まらず、タイトル画面だけ表示する</pre>
+          </div>
+        </details>
         <details>
           <summary>想定コードはこちら（game.js に追加）</summary>
           <div class="toggle-body">
@@ -2262,8 +2135,8 @@ if (state !== 'playing') return;</pre>
             <span style="font-size: 0.82em; color: #555555;">ハルシネーションに注意しつつ、うまく使えば生産性が大幅に向上</span></li>
           <li><strong>プロンプト（指示の出し方）が鍵</strong><br>
             <span style="font-size: 0.82em; color: #555555;">具体的で明確な指示を出すことで、AIの出力品質が格段に上がる</span></li>
-          <li><strong>まず触ってみることが大事</strong><br>
-            <span style="font-size: 0.82em; color: #555555;">今日触ったツールを明日から使ってみよう。使うほどコツが掴める</span></li>
+          <li><strong>知見と具体的なイメージがあるほどAIは化ける</strong><br>
+            <span style="font-size: 0.82em; color: #555555;">使う人の知見が多ければ多いほど、具体的なイメージができていればできているほど、AIのアウトプットも質の高いものになる</span></li>
         </ol>
       </section>
 
