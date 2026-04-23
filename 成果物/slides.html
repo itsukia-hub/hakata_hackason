@@ -1425,16 +1425,49 @@
           </div>
         </div>
 
-        <!-- 概念図: ブランチ -->
-        <div style="margin: 1em auto 0; max-width: min(62%, 680px); font-size: 0.85em; background: #f7f7f7; border: 1px dashed #ccc; border-radius: 8px; padding: 0.8em 1em;">
-          <div style="display: flex; align-items: center; gap: 0.8em; margin-bottom: 0.4em;">
-            <span style="min-width: 4.5em; font-weight: 700; color: #16213e;">&#x1F33F; main</span>
-            <span style="letter-spacing: 0.3em; color: #16213e; font-size: 1.1em;">●─●─●───────●─</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 0.8em;">
-            <span style="min-width: 4.5em; font-weight: 700; color: #0b8f5d;">&#x1F33F; feature</span>
-            <span style="letter-spacing: 0.3em; color: #0b8f5d; font-size: 1.1em;">&nbsp;&nbsp;&nbsp;&nbsp;└●─●─●┘</span>
-          </div>
+        <!-- 概念図: ブランチ分岐・マージ（3本） -->
+        <div style="margin: 0.6em auto 0; max-width: min(80%, 820px);">
+          <svg viewBox="0 0 700 230" style="width: 100%; display: block;">
+            <!-- main 幹線 -->
+            <line x1="90" y1="50" x2="670" y2="50" stroke="#16213e" stroke-width="4"/>
+            <!-- feature 分岐 -->
+            <path d="M 170 50 Q 195 50 215 100 L 395 100 Q 420 100 445 50"
+                  fill="none" stroke="#0b8f5d" stroke-width="4"/>
+            <!-- hotfix 分岐 -->
+            <path d="M 270 50 Q 295 50 315 170 L 525 170 Q 550 170 575 50"
+                  fill="none" stroke="#e94560" stroke-width="4"/>
+
+            <!-- main コミット -->
+            <circle cx="115" cy="50" r="10" fill="#16213e"/>
+            <circle cx="155" cy="50" r="10" fill="#16213e"/>
+            <circle cx="245" cy="50" r="10" fill="#16213e"/>
+            <circle cx="460" cy="50" r="10" fill="#16213e"/>
+            <circle cx="590" cy="50" r="10" fill="#16213e"/>
+            <circle cx="645" cy="50" r="10" fill="#16213e"/>
+            <!-- feature コミット -->
+            <circle cx="265" cy="100" r="10" fill="#0b8f5d"/>
+            <circle cx="335" cy="100" r="10" fill="#0b8f5d"/>
+            <circle cx="395" cy="100" r="10" fill="#0b8f5d"/>
+            <!-- hotfix コミット -->
+            <circle cx="370" cy="170" r="10" fill="#e94560"/>
+            <circle cx="470" cy="170" r="10" fill="#e94560"/>
+
+            <!-- ラベル -->
+            <text x="10" y="55" font-size="18" font-weight="700" fill="#16213e">main</text>
+            <text x="10" y="105" font-size="18" font-weight="700" fill="#0b8f5d">feature</text>
+            <text x="10" y="175" font-size="18" font-weight="700" fill="#e94560">hotfix</text>
+
+            <!-- merge ラベル -->
+            <text x="430" y="35" font-size="14" font-weight="700" fill="#0b8f5d">merge ▶</text>
+            <text x="560" y="35" font-size="14" font-weight="700" fill="#e94560">merge ▶</text>
+
+            <!-- 分岐ラベル -->
+            <text x="170" y="42" font-size="12" fill="#0b8f5d">分岐</text>
+            <text x="270" y="42" font-size="12" fill="#e94560">分岐</text>
+
+            <!-- 凡例（図の下） -->
+            <text x="340" y="215" font-size="13" fill="#555" text-anchor="middle">分岐して並行作業 → 完成したら main にマージ</text>
+          </svg>
         </div>
       </section>
 
