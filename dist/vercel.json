@@ -1,0 +1,12 @@
+{
+  "headers": [
+    {
+      "source": "/code/step5/(.*)",
+      "headers": [{ "key": "Content-Disposition", "value": "attachment" }]
+    },
+    {
+      "source": "/code/step8/(.*)",
+      "headers": [{ "key": "Content-Disposition", "value": "attachment" }]
+    }
+  ]
+}

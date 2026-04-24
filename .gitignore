@@ -3,6 +3,7 @@
 !dist/
 !dist/slides.html
 !dist/_headers
+!dist/vercel.json
 !dist/image/
 !dist/image/**
 !dist/code/
