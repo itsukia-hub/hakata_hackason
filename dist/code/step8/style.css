@@ -1,0 +1,115 @@
+body {
+  background: #1a1a2e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Meiryo', sans-serif;
+}
+
+/* ゲームのフィールド */
+#field {
+  width: 800px;
+  height: 600px;
+  background: #16213e;
+  border: 3px solid #e94560;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 上部の情報表示 */
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  color: #fff;
+  font-size: 18px;
+  z-index: 10;
+}
+
+/* プレイヤー（緑の丸） */
+#player {
+  width: 28px;
+  height: 28px;
+  background: #0fff50;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 5;
+}
+
+/* 鬼（赤い丸） */
+#oni {
+  width: 32px;
+  height: 32px;
+  background: #e94560;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 5;
+}
+
+/* アイテム（黄色い丸） */
+.item {
+  width: 20px;
+  height: 20px;
+  background: #f1c40f;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 3;
+}
+
+/* オーバーレイ画面（タイトル・ゲームオーバー・クリア） */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.overlay h1 {
+  color: #e94560;
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.overlay h1.green {
+  color: #0fff50;
+}
+
+.overlay h1.red {
+  color: #e94560;
+}
+
+.overlay p {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.overlay button {
+  background: #e94560;
+  color: #fff;
+  border: none;
+  padding: 12px 40px;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #c73650;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>鬼ごっこ大作戦</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ゲームのフィールド -->
+<div id="field">
+
+  <!-- 上部の情報表示 -->
+  <div id="hud">
+    <span id="time-display">残り 30秒</span>
+    <span id="score-display">スコア: 0</span>
+  </div>
+
+  <!-- プレイヤー -->
+  <div id="player"></div>
+
+  <!-- 鬼 -->
+  <div id="oni"></div>
+
+  <!-- タイトル画面 -->
+  <div id="title-screen" class="overlay">
+    <h1>鬼ごっこ大作戦</h1>
+    <p>鬼から逃げてアイテムを集めろ！</p>
+    <button onclick="startGame()">スタート</button>
+  </div>
+
+  <!-- ゲームオーバー画面 -->
+  <div id="gameover-screen" class="overlay" style="display: none;">
+    <h1 class="red">GAME OVER</h1>
+    <p id="gameover-score"></p>
+    <button onclick="startGame()">リトライ</button>
+  </div>
+
+  <!-- クリア画面 -->
+  <div id="clear-screen" class="overlay" style="display: none;">
+    <h1 class="green">CLEAR!</h1>
+    <p id="clear-score"></p>
+    <button onclick="startGame()">もう一度</button>
+  </div>
+
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>

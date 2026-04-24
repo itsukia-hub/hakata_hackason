@@ -1,4 +1,8 @@
 *
 !.gitignore
-!成果物/
-!成果物/slides.html
+!dist/
+!dist/slides.html
+!dist/image/
+!dist/image/**
+!dist/code/
+!dist/code/**
