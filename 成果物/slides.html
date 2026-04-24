@@ -1693,6 +1693,21 @@
         </table>
       </section>
 
+      <!-- アプリ実行方法 -->
+      <section>
+        <h2>アプリの実行方法</h2>
+        <h3><code>index.html</code> をブラウザで開くだけ</h3>
+        <ol>
+          <li>エクスプローラーで <code>index.html</code> を <strong>ダブルクリック</strong><br>
+            <span style="font-size: 0.82em; color: #555;">または Chrome/Edge のウィンドウに<strong>ドラッグ＆ドロップ</strong></span></li>
+          <li>コード修正後は <strong>Ctrl + R</strong>（または F5）で再読み込み</li>
+          <li>動かない時は <strong>F12</strong> でブラウザのコンソールを開き、赤いエラーを確認</li>
+        </ol>
+        <div class="highlight-box" style="margin-top: 0.7em;">
+          <p>サーバーを立てる必要はありません。ローカルファイルのまま動きます</p>
+        </div>
+      </section>
+
       <!-- ===== Step 1: 実装画面 ===== -->
       <section>
         <div class="step-badge">STEP 1</div>
@@ -1729,38 +1744,38 @@
         <details>
           <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-            <p><strong>index.html（新規作成）</strong></p>
+            <p><strong>① index.html（新規作成）</strong></p>
 <pre>&lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;
 &lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;title&gt;鬼ごっこ大作戦&lt;/title&gt;
-&lt;link rel="stylesheet" href="style.css"&gt;
+	&lt;meta charset="UTF-8"&gt;
+	&lt;title&gt;鬼ごっこ大作戦&lt;/title&gt;
+	&lt;link rel="stylesheet" href="style.css"&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;div id="field"&gt;&lt;/div&gt;
-&lt;script src="game.js"&gt;&lt;/script&gt;
+	&lt;div id="field"&gt;&lt;/div&gt;
+	&lt;script src="game.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</pre>
-            <p><strong>style.css（新規作成）</strong></p>
+            <p><strong>② style.css（新規作成）</strong></p>
 <pre>body {
-  background: #1a1a2e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: 'Meiryo', sans-serif;
+	background: #1a1a2e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	font-family: 'Meiryo', sans-serif;
 }
 #field {
-  width: 800px;
-  height: 600px;
-  background: #16213e;
-  border: 3px solid #e94560;
-  position: relative;
-  overflow: hidden;
+	width: 800px;
+	height: 600px;
+	background: #16213e;
+	border: 3px solid #e94560;
+	position: relative;
+	overflow: hidden;
 }</pre>
-            <p><strong>game.js（新規作成・空でOK）</strong></p>
+            <p><strong>③ game.js（新規作成・空でOK）</strong></p>
           </div>
         </details>
       </section>
@@ -1799,19 +1814,19 @@
         <details>
           <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-            <p><strong>index.html の #field 内に追加</strong></p>
+            <p><strong>① index.html の #field 内に追加</strong></p>
 <pre>&lt;div id="field"&gt;
-  &lt;div id="player"&gt;&lt;/div&gt;
+	&lt;div id="player"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+            <p><strong>② style.css の末尾に追加</strong></p>
 <pre>#player {
-  width: 28px;
-  height: 28px;
-  background: #0fff50;
-  border-radius: 50%;
-  position: absolute;
-  top: 286px;   /* 600/2 - 14（中央配置） */
-  left: 386px;  /* 800/2 - 14（中央配置） */
+	width: 28px;
+	height: 28px;
+	background: #0fff50;
+	border-radius: 50%;
+	position: absolute;
+	top: 286px;   /* 600/2 - 14（中央配置） */
+	left: 386px;  /* 800/2 - 14（中央配置） */
 }</pre>
             <p style="font-size: 0.9em; color: #888;">※ transform ではなく top/left で中央配置（次STEP でJSから座標を直接指定するため）</p>
           </div>
@@ -1823,7 +1838,7 @@
         <div class="step-badge">STEP 3</div>
         <h2>プレイヤーをマウスで動かす</h2>
         <h3>実装画面の確認</h3>
-        <img src="image/step3.png" alt="STEP3 完成画面（マウス追従）" class="slide-photo" style="max-width: min(78%, 880px); max-height: 420px; margin: 0.6em auto; display: block;">
+        <img src="image/step3.gif" alt="STEP3 完成画面（マウス追従）" class="slide-photo" style="max-width: min(78%, 880px); max-height: 420px; margin: 0.6em auto; display: block;">
       </section>
 
       <!-- ===== Step 3: 確認ポイント ===== -->
@@ -1855,8 +1870,9 @@
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（game.js 新規記述）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
+            <p><strong>game.js（新規記述・既存ファイルは空なので全て書く）</strong></p>
 <pre>// HTML要素の取得
 var field = document.getElementById('field');
 var playerEl = document.getElementById('player');
@@ -1874,32 +1890,32 @@ var mouseY = H / 2;
 
 // マウス位置を記録
 field.addEventListener('mousemove', function (e) {
-  var rect = field.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
+	var rect = field.getBoundingClientRect();
+	mouseX = e.clientX - rect.left;
+	mouseY = e.clientY - rect.top;
 });
 
 // 毎フレームの更新処理
 function update() {
-  var dx = mouseX - playerX;
-  var dy = mouseY - playerY;
-  var dist = Math.sqrt(dx * dx + dy * dy);
-  if (dist > 2) {
-    playerX += (dx / dist) * playerSpeed;
-    playerY += (dy / dist) * playerSpeed;
-  }
-  // フィールド内に制限
-  playerX = Math.max(playerR, Math.min(W - playerR, playerX));
-  playerY = Math.max(playerR, Math.min(H - playerR, playerY));
-  // 位置を反映
-  playerEl.style.left = (playerX - playerR) + 'px';
-  playerEl.style.top = (playerY - playerR) + 'px';
+	var dx = mouseX - playerX;
+	var dy = mouseY - playerY;
+	var dist = Math.sqrt(dx * dx + dy * dy);
+	if (dist > 2) {
+		playerX += (dx / dist) * playerSpeed;
+		playerY += (dy / dist) * playerSpeed;
+	}
+	// フィールド内に制限
+	playerX = Math.max(playerR, Math.min(W - playerR, playerX));
+	playerY = Math.max(playerR, Math.min(H - playerR, playerY));
+	// 位置を反映
+	playerEl.style.left = (playerX - playerR) + 'px';
+	playerEl.style.top = (playerY - playerR) + 'px';
 }
 
 // メインループ
 function gameLoop() {
-  update();
-  requestAnimationFrame(gameLoop);
+	update();
+	requestAnimationFrame(gameLoop);
 }
 gameLoop();</pre>
           </div>
@@ -1937,38 +1953,39 @@ gameLoop();</pre>
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（3ファイルへの追加）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-            <p><strong>index.html の #field 内（プレイヤーの後ろ）に追加</strong></p>
-<pre>&lt;div id="field"&gt;
-  &lt;div id="player"&gt;&lt;/div&gt;
-  &lt;div id="oni"&gt;&lt;/div&gt;
-&lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+            <p><strong>① index.html の #field 内（#playerの後）に追加</strong></p>
+<pre>&lt;div id="oni"&gt;&lt;/div&gt;</pre>
+
+            <p><strong>② style.css の末尾に追加</strong></p>
 <pre>#oni {
-  width: 32px;
-  height: 32px;
-  background: #e94560;
-  border-radius: 50%;
-  position: absolute;
+	width: 32px;
+	height: 32px;
+	background: #e94560;
+	border-radius: 50%;
+	position: absolute;
 }</pre>
-            <p><strong>game.js に追加（既存コードへ差し込み）</strong></p>
-<pre>// 冒頭（要素取得の箇所）に追加
-var oniEl = document.getElementById('oni');
 
-// ゲーム設定の箇所に追加
-var oniR = 16;
-var oniSpeed = 2.0;
-var oniX = 100;
-var oniY = 100;
+            <p><strong>③ game.js の冒頭（要素取得の箇所）に追加</strong></p>
+<pre>var oniEl = document.getElementById('oni');</pre>
 
-// update() の中（プレイヤー位置反映の前）に追加
+            <p><strong>④ game.js のゲーム設定（playerSpeedの下）に追加</strong></p>
+<pre>var oniR = 16;
+var oniSpeed = 2.0;</pre>
+
+            <p><strong>⑤ game.js の位置宣言（mouseX/Yの下）に追加</strong></p>
+<pre>var oniX = 100;
+var oniY = 100;</pre>
+
+            <p><strong>⑥ game.js の update() 内（プレイヤー位置反映の後）に追加</strong></p>
+<pre>// 鬼がプレイヤーを追いかける
 var odx = playerX - oniX;
 var ody = playerY - oniY;
 var odist = Math.sqrt(odx * odx + ody * ody);
 if (odist > 1) {
-  oniX += (odx / odist) * oniSpeed;
-  oniY += (ody / odist) * oniSpeed;
+	oniX += (odx / odist) * oniSpeed;
+	oniY += (ody / odist) * oniSpeed;
 }
 oniEl.style.left = (oniX - oniR) + 'px';
 oniEl.style.top = (oniY - oniR) + 'px';</pre>
@@ -2014,72 +2031,92 @@ oniEl.style.top = (oniY - oniR) + 'px';</pre>
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（3ファイルへの追加）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-            <p><strong>index.html の #field 内（末尾）に追加</strong></p>
+            <p><strong>① index.html の #field 内（末尾）に追加</strong></p>
 <pre>&lt;div id="gameover-screen" class="overlay" style="display:none;"&gt;
-  &lt;h1 class="red"&gt;GAME OVER&lt;/h1&gt;
-  &lt;button onclick="startGame()"&gt;リトライ&lt;/button&gt;
+	&lt;h1 class="red"&gt;GAME OVER&lt;/h1&gt;
+	&lt;button onclick="startGame()"&gt;リトライ&lt;/button&gt;
 &lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+
+            <p><strong>② style.css の末尾に追加</strong></p>
 <pre>.overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 20;
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 20;
 }
 .overlay h1 {
-  color: #e94560;
-  font-size: 48px;
-  margin-bottom: 10px;
+	color: #e94560;
+	font-size: 48px;
+	margin-bottom: 10px;
 }
 .overlay h1.red { color: #e94560; }
 .overlay button {
-  background: #e94560;
-  color: #fff;
-  border: none;
-  padding: 12px 40px;
-  font-size: 20px;
-  border-radius: 8px;
-  cursor: pointer;
+	background: #e94560;
+	color: #fff;
+	border: none;
+	padding: 12px 40px;
+	font-size: 20px;
+	border-radius: 8px;
+	cursor: pointer;
 }</pre>
-            <p><strong>game.js に追加</strong></p>
-<pre>// 冒頭（要素取得）に追加
-var gameoverScreen = document.getElementById('gameover-screen');
 
-// ゲーム設定に追加
-var state = 'playing'; // 'playing' / 'gameover'
+            <p><strong>③ game.js の冒頭（要素取得）に追加</strong></p>
+<pre>var gameoverScreen = document.getElementById('gameover-screen');</pre>
 
-// 当たり判定の関数（update の前に追加）
-function isHit(x1, y1, r1, x2, y2, r2) {
-  var dx = x1 - x2;
-  var dy = y1 - y2;
-  return Math.sqrt(dx * dx + dy * dy) &lt; r1 + r2;
-}
+            <p><strong>④ game.js のゲーム設定に追加</strong></p>
+<pre>var state = 'playing'; // 'playing' / 'gameover'</pre>
 
-// update() の先頭に追加（動作停止）
-if (state !== 'playing') return;
+            <p><strong>⑤ game.js の update() 関数の前に追加</strong></p>
+<pre>function isHit(x1, y1, r1, x2, y2, r2) {
+	var dx = x1 - x2;
+	var dy = y1 - y2;
+	return Math.sqrt(dx * dx + dy * dy) &lt; r1 + r2;
+}</pre>
 
-// update() の末尾（鬼の位置反映の後）に追加
-if (isHit(playerX, playerY, playerR, oniX, oniY, oniR)) {
-  state = 'gameover';
-  gameoverScreen.style.display = 'flex';
-}
+            <p><strong>⑥ game.js の update() 先頭に追加</strong></p>
+<pre>if (state !== 'playing') return;</pre>
 
-// リトライ用の startGame 関数（game.js の末尾に追加）
-function startGame() {
-  state = 'playing';
-  playerX = W / 2; playerY = H / 2;
-  oniX = 100; oniY = 100;
-  gameoverScreen.style.display = 'none';
+            <p><strong>⑦ game.js の update() 末尾（鬼の位置反映の後）に追加</strong></p>
+<pre>if (isHit(playerX, playerY, playerR, oniX, oniY, oniR)) {
+	state = 'gameover';
+	gameoverScreen.style.display = 'flex';
+}</pre>
+
+            <p><strong>⑧ game.js の末尾に追加（リトライ用）</strong></p>
+<pre>function startGame() {
+	state = 'playing';
+	playerX = W / 2; playerY = H / 2;
+	oniX = 100; oniY = 100;
+	gameoverScreen.style.display = 'none';
 }</pre>
           </div>
         </details>
+      </section>
+
+      <!-- 前半完成版コード（STEP5終了時点） -->
+      <section>
+        <h2>前半完成版コード</h2>
+        <h3>ここまで（STEP1〜5）の完成コードをDL・参照できます</h3>
+        <table style="margin: 0.5em auto;">
+          <thead>
+            <tr><th>ファイル</th><th>リンク</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>index.html</code></td><td><a href="code/step5/index.html" target="_blank" download>開く / DL</a></td></tr>
+            <tr><td><code>style.css</code></td><td><a href="code/step5/style.css" target="_blank" download>開く / DL</a></td></tr>
+            <tr><td><code>game.js</code></td><td><a href="code/step5/game.js" target="_blank" download>開く / DL</a></td></tr>
+          </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>どうしても動かない時の最終手段。まずは自分のプロンプトで試行錯誤を</p>
+        </div>
       </section>
 
       <!-- ============================================================
@@ -2138,73 +2175,74 @@ function startGame() {
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（game.js に追加）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-<pre>// index.html の #field 内先頭に追加
-&lt;div id="hud"&gt;
-  &lt;span id="time-display"&gt;残り 30秒&lt;/span&gt;
-&lt;/div&gt;
-
-// #field 内末尾に追加
-&lt;div id="clear-screen" class="overlay" style="display:none;"&gt;
-  &lt;h1 class="green"&gt;CLEAR!&lt;/h1&gt;
-  &lt;button onclick="startGame()"&gt;もう一度&lt;/button&gt;
+            <p><strong>① index.html の #field 内（先頭）にHUDを追加</strong></p>
+<pre>&lt;div id="hud"&gt;
+	&lt;span id="time-display"&gt;残り 30秒&lt;/span&gt;
 &lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+
+            <p><strong>② index.html の #field 内（末尾）にCLEAR画面を追加</strong></p>
+<pre>&lt;div id="clear-screen" class="overlay" style="display:none;"&gt;
+	&lt;h1 class="green"&gt;CLEAR!&lt;/h1&gt;
+	&lt;button onclick="startGame()"&gt;もう一度&lt;/button&gt;
+&lt;/div&gt;</pre>
+
+            <p><strong>③ style.css の末尾に追加</strong></p>
 <pre>#hud {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 40px;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-  color: #fff;
-  font-size: 18px;
-  z-index: 10;
-  box-sizing: border-box;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 40px;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 15px;
+	color: #fff;
+	font-size: 18px;
+	z-index: 10;
+	box-sizing: border-box;
 }
 .overlay h1.green { color: #0fff50; }</pre>
-            <p><strong>game.js に追加・修正</strong></p>
-<pre>// 冒頭（要素取得）に追加
-var timeDisplay = document.getElementById('time-display');
-var clearScreen = document.getElementById('clear-screen');
 
-// ゲーム設定に追加
-var timeLeft = 30;
-var timer = null;
+            <p><strong>④ game.js の冒頭（要素取得）に追加</strong></p>
+<pre>var timeDisplay = document.getElementById('time-display');
+var clearScreen = document.getElementById('clear-screen');</pre>
 
-// HUD更新関数（game.js の末尾などに追加）
-function updateHUD() {
-  timeDisplay.textContent = '残り ' + timeLeft + '秒';
-}
+            <p><strong>⑤ game.js のゲーム設定に追加</strong></p>
+<pre>var timeLeft = 30;
+var timer = null;</pre>
 
-// startGame 関数をタイマー起動版に差し替え
-function startGame() {
-  state = 'playing';
-  playerX = W / 2; playerY = H / 2;
-  oniX = 100; oniY = 100;
-  timeLeft = 30;
-  updateHUD();
-  gameoverScreen.style.display = 'none';
-  clearScreen.style.display = 'none';
+            <p><strong>⑥ game.js の末尾に HUD更新関数を追加</strong></p>
+<pre>function updateHUD() {
+	timeDisplay.textContent = '残り ' + timeLeft + '秒';
+}</pre>
 
-  clearInterval(timer);
-  timer = setInterval(function () {
-    if (state !== 'playing') return;
-    timeLeft--;
-    updateHUD();
-    if (timeLeft &lt;= 0) {
-      state = 'clear';
-      clearInterval(timer);
-      clearScreen.style.display = 'flex';
-    }
-  }, 1000);
-}
+            <p><strong>⑦ 既存の startGame 関数を以下に差し替え（タイマー起動を追加）</strong></p>
+<pre>function startGame() {
+	state = 'playing';
+	playerX = W / 2; playerY = H / 2;
+	oniX = 100; oniY = 100;
+	timeLeft = 30;
+	updateHUD();
+	gameoverScreen.style.display = 'none';
+	clearScreen.style.display = 'none';
 
-// ファイル末尾でページ読み込み時にゲーム開始
-startGame();</pre>
+	clearInterval(timer);
+	timer = setInterval(function () {
+		if (state !== 'playing') return;
+		timeLeft--;
+		updateHUD();
+		if (timeLeft &lt;= 0) {
+			state = 'clear';
+			clearInterval(timer);
+			clearScreen.style.display = 'flex';
+		}
+	}, 1000);
+}</pre>
+
+            <p><strong>⑧ game.js の末尾に追加（ページ読み込み時に自動起動）</strong></p>
+<pre>startGame();</pre>
           </div>
         </details>
       </section>
@@ -2244,66 +2282,67 @@ startGame();</pre>
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（game.js に追加）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-<pre>// index.html の #hud にスコア表示を追加
-&lt;div id="hud"&gt;
-  &lt;span id="time-display"&gt;残り 30秒&lt;/span&gt;
-  &lt;span id="score-display"&gt;スコア: 0&lt;/span&gt;
+            <p><strong>① index.html の #hud にスコア表示を追加</strong></p>
+<pre>&lt;div id="hud"&gt;
+	&lt;span id="time-display"&gt;残り 30秒&lt;/span&gt;
+	&lt;span id="score-display"&gt;スコア: 0&lt;/span&gt;
 &lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+
+            <p><strong>② style.css の末尾に追加</strong></p>
 <pre>.item {
-  width: 20px;
-  height: 20px;
-  background: #f1c40f;
-  border-radius: 50%;
-  position: absolute;
-  z-index: 3;
+	width: 20px;
+	height: 20px;
+	background: #f1c40f;
+	border-radius: 50%;
+	position: absolute;
+	z-index: 3;
 }</pre>
-            <p><strong>game.js に追加・修正</strong></p>
-<pre>// 冒頭（要素取得）に追加
-var scoreDisplay = document.getElementById('score-display');
 
-// ゲーム設定に追加
-var items = [];
-var score = 0;
+            <p><strong>③ game.js の冒頭（要素取得）に追加</strong></p>
+<pre>var scoreDisplay = document.getElementById('score-display');</pre>
 
-// アイテムを1個追加する関数
-function addItem() {
-  var div = document.createElement('div');
-  div.className = 'item';
-  var x = 30 + Math.random() * (W - 60);
-  var y = 40 + Math.random() * (H - 70);
-  div.style.left = (x - 10) + 'px';
-  div.style.top = (y - 10) + 'px';
-  field.appendChild(div);
-  items.push({ x: x, y: y, r: 10, el: div });
-}
+            <p><strong>④ game.js のゲーム設定に追加</strong></p>
+<pre>var items = [];
+var score = 0;</pre>
 
-// updateHUD を以下に差し替え
-function updateHUD() {
-  timeDisplay.textContent = '残り ' + timeLeft + '秒';
-  scoreDisplay.textContent = 'スコア: ' + score;
-}
+            <p><strong>⑤ game.js の末尾に追加（アイテム追加関数）</strong></p>
+<pre>function addItem() {
+	var div = document.createElement('div');
+	div.className = 'item';
+	var x = 30 + Math.random() * (W - 60);
+	var y = 40 + Math.random() * (H - 70);
+	div.style.left = (x - 10) + 'px';
+	div.style.top = (y - 10) + 'px';
+	field.appendChild(div);
+	items.push({ x: x, y: y, r: 10, el: div });
+}</pre>
 
-// update() の末尾に追加（アイテム取得判定）
-for (var i = items.length - 1; i &gt;= 0; i--) {
-  if (isHit(playerX, playerY, playerR, items[i].x, items[i].y, items[i].r)) {
-    score += 100;
-    updateHUD();
-    items[i].el.remove();
-    items.splice(i, 1);
-  }
-}
+            <p><strong>⑥ 既存の updateHUD 関数を以下に差し替え</strong></p>
+<pre>function updateHUD() {
+	timeDisplay.textContent = '残り ' + timeLeft + '秒';
+	scoreDisplay.textContent = 'スコア: ' + score;
+}</pre>
 
-// startGame の冒頭に「アイテム初期化」を追加
-for (var j = 0; j &lt; items.length; j++) items[j].el.remove();
+            <p><strong>⑦ game.js の update() 末尾に追加（アイテム取得判定）</strong></p>
+<pre>for (var i = items.length - 1; i &gt;= 0; i--) {
+	if (isHit(playerX, playerY, playerR, items[i].x, items[i].y, items[i].r)) {
+		score += 100;
+		updateHUD();
+		items[i].el.remove();
+		items.splice(i, 1);
+	}
+}</pre>
+
+            <p><strong>⑧ startGame の冒頭に追加（アイテム初期化）</strong></p>
+<pre>for (var j = 0; j &lt; items.length; j++) items[j].el.remove();
 items = [];
 score = 0;
-addItem(); addItem(); addItem();
+addItem(); addItem(); addItem();</pre>
 
-// startGame 内のタイマー処理に「3秒ごとに追加」を追加
-if (timeLeft % 3 === 0 &amp;&amp; items.length &lt; 8) addItem();</pre>
+            <p><strong>⑨ startGame 内の setInterval コールバックに追加（3秒ごとに追加）</strong></p>
+<pre>if (timeLeft % 3 === 0 &amp;&amp; items.length &lt; 8) addItem();</pre>
           </div>
         </details>
       </section>
@@ -2342,32 +2381,33 @@ if (timeLeft % 3 === 0 &amp;&amp; items.length &lt; 8) addItem();</pre>
           </div>
         </details>
         <details>
-          <summary>想定コードはこちら（3ファイルへの追加・修正）</summary>
+          <summary>想定コードはこちら</summary>
           <div class="toggle-body">
-            <p><strong>index.html の #field 内（先頭）に追加</strong></p>
+            <p><strong>① index.html の #field 内（先頭）に追加</strong></p>
 <pre>&lt;div id="title-screen" class="overlay"&gt;
-  &lt;h1&gt;鬼ごっこ大作戦&lt;/h1&gt;
-  &lt;p&gt;鬼から逃げてアイテムを集めろ！&lt;/p&gt;
-  &lt;button onclick="startGame()"&gt;スタート&lt;/button&gt;
+	&lt;h1&gt;鬼ごっこ大作戦&lt;/h1&gt;
+	&lt;p&gt;鬼から逃げてアイテムを集めろ！&lt;/p&gt;
+	&lt;button onclick="startGame()"&gt;スタート&lt;/button&gt;
 &lt;/div&gt;</pre>
-            <p><strong>style.css の末尾に追加</strong></p>
+
+            <p><strong>② style.css の末尾に追加</strong></p>
 <pre>.overlay p {
-  color: #fff;
-  font-size: 20px;
-  margin-bottom: 20px;
+	color: #fff;
+	font-size: 20px;
+	margin-bottom: 20px;
 }</pre>
-            <p><strong>game.js の修正</strong></p>
-<pre>// 冒頭（要素取得）に追加
-var titleScreen = document.getElementById('title-screen');
 
-// state の初期値を 'title' に変更
-var state = 'title'; // 'title' / 'playing' / 'gameover' / 'clear'
+            <p><strong>③ game.js の冒頭（要素取得）に追加</strong></p>
+<pre>var titleScreen = document.getElementById('title-screen');</pre>
 
-// startGame の冒頭で titleScreen を非表示に追加
-titleScreen.style.display = 'none';
+            <p><strong>④ 既存の var state = 'playing'; を以下に変更</strong></p>
+<pre>var state = 'title'; // 'title' / 'playing' / 'gameover' / 'clear'</pre>
 
-// ファイル末尾の startGame(); の呼び出しを削除
-// （STEP6で追加した自動起動を外し、スタートボタン押下でのみ開始するように変える）</pre>
+            <p><strong>⑤ startGame 関数の冒頭に追加</strong></p>
+<pre>titleScreen.style.display = 'none';</pre>
+
+            <p><strong>⑥ ファイル末尾の startGame(); の呼び出しを削除</strong></p>
+            <p style="font-size: 0.88em; color: #555;">※ STEP6で追加した自動起動を外し、スタートボタン押下でのみゲーム開始するように変える</p>
           </div>
         </details>
       </section>
@@ -2401,6 +2441,25 @@ titleScreen.style.display = 'none';
         </ul>
         <div class="highlight-box" style="margin-top: 0.7em;">
           <p>面白いカスタマイズができたら<br>最後にみんなに見せましょう!</p>
+        </div>
+      </section>
+
+      <!-- 全完成版コード（STEP8終了時点） -->
+      <section>
+        <h2>全完成版コード</h2>
+        <h3>STEP1〜8すべて実装した完成版コードをDL・参照できます</h3>
+        <table style="margin: 0.5em auto;">
+          <thead>
+            <tr><th>ファイル</th><th>リンク</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>index.html</code></td><td><a href="code/step8/index.html" target="_blank" download>開く / DL</a></td></tr>
+            <tr><td><code>style.css</code></td><td><a href="code/step8/style.css" target="_blank" download>開く / DL</a></td></tr>
+            <tr><td><code>game.js</code></td><td><a href="code/step8/game.js" target="_blank" download>開く / DL</a></td></tr>
+          </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top: 0.5em;">
+          <p>カスタマイズのベースとして使ったり、自分のコードと比較したりしてみてください</p>
         </div>
       </section>
 
