@@ -2,6 +2,7 @@
 !.gitignore
 !dist/
 !dist/slides.html
+!dist/_headers
 !dist/image/
 !dist/image/**
 !dist/code/
